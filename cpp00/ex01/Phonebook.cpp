@@ -3,8 +3,18 @@
 #include <iostream>
 #include <iomanip>
 
+Phonebook::Phonebook()
+{
+	this->size = 0;
+}
+
 void	Phonebook::printList()
 {
+	if (this->size == 0)
+	{
+		std::cout << "Phonebook is empty, add contact first\n";
+		return ;	
+	}
 	std::cout << "\n-------------------Contacts------------------\n";
     std::cout << "|" << std::setw(10) << "Index" << std::flush;
     std::cout << "|" << std::setw(10) << "First Name" << std::flush;
@@ -23,11 +33,9 @@ void	Phonebook::printList()
 void	Phonebook::searchContact()
 {
 	std::string i = "1";
-	if (this->size <= 0 || this->size > 8)
-	{
-		std::cout << "Phonebook is empty, add contact first\n";
+	if (this->size == 0)
 		return ;	
-	}
+
 	while (1)
 	{
 		std::cout << "Enter index from 0 to " << this->size - 1 << ": ";

@@ -13,6 +13,7 @@ public:
 	void		printList();
 	void		addContact();
 	void		searchContact();
+	Phonebook();
 };
 
 #endif
