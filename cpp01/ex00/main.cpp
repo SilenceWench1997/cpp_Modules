@@ -18,6 +18,6 @@ int main()
 	Zombie *zed = newZombie("test1");
 	zed->announce();
 	randomChump("test2");
-	delete zed;
+	delete (zed);
 	return (0);
 }
