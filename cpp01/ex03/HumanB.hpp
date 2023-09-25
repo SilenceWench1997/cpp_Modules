@@ -5,7 +5,7 @@
 
 class HumanB{
 	std::string	name;
-	Weapon	_Weapon;
+	Weapon	*_weapon;
 public:
 	void	attack();
 	void	setWeapon(Weapon &weapREF);

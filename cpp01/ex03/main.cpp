@@ -16,11 +16,11 @@ int main()
 	{
 		Weapon club = Weapon("crude spiked club");
 		HumanB jim("Jim");
-		std::cout << "Here" << std::endl;
 		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
 	}
+	system("leaks necessary_violence");
 return 0;
 }

@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-HumanB::HumanB(std::string name):_Weapon(NULL)
+HumanB::HumanB(std::string name):_weapon(NULL)
 {
 	this->name = name;
 	std::cout << "HumanB " << name << " created" << std::endl;
@@ -16,10 +16,10 @@ HumanB::~HumanB()
 
 void	HumanB::attack()
 {
-	std::cout << this->name << " attacks with their " << this->_Weapon.getType();
+	std::cout << this->name << " attacks with their " << this->_weapon->getType() << std::endl;
 }
 
 void	HumanB::setWeapon(Weapon &weapREF)
 {
-	this->_Weapon = weapREF;
+	this->_weapon = &weapREF;
 }
