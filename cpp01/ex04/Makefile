@@ -10,7 +10,7 @@ OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADERS)
+$(NAME): $(OBJ)
 	$(CC) $(CPPFLAGS) $(SRC) -o $(NAME)
 
 $(OBJ_DIR):
