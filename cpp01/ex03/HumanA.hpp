@@ -6,7 +6,7 @@
 
 class HumanA{
 	std::string	name;
-	Weapon	&_Weapon;
+	Weapon	&_weapon;
 public:
 	void	attack();
 	HumanA(std::string name, Weapon &weapREF);

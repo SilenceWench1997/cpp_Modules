@@ -5,7 +5,7 @@ CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
 RM		= rm -rf
 
 OBJ_DIR	= obj
-SRC		= main.cpp
+SRC		= main.cpp replace.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 all: $(NAME)

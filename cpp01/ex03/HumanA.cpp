@@ -3,10 +3,10 @@
 #include <string>
 #include <iostream>
 
-HumanA::HumanA(std::string name, Weapon &weapREF): _Weapon(weapREF)
+HumanA::HumanA(std::string name, Weapon &weapREF): _weapon(weapREF)
 {
 	this->name = name;
-	std::cout << "HumanA " << name << " was created with " << weapREF.getType() << std::endl;
+	std::cout << "HumanA " << name << " was created with " << weap.getType() << std::endl;
 }
 
 HumanA::~HumanA()
@@ -16,5 +16,5 @@ HumanA::~HumanA()
 
 void	HumanA::attack()
 {
-	std::cout << this->name << " attacks with their " << this->_Weapon.getType() << std::endl;
+	std::cout << this->name << " attacks with their " << this->_weapon.getType() << std::endl;
 }
