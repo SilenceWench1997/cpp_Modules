@@ -11,7 +11,7 @@ HumanB::HumanB(std::string name):_weapon(NULL)
 
 HumanB::~HumanB()
 {
-	std::cout << "HumanB" << this->name << "destroyed" << std::endl;
+	std::cout << "HumanB " << this->name << " was destroyed" << std::endl;
 }
 
 void	HumanB::attack()

@@ -4,7 +4,10 @@
 
 int main()
 {
-	std::string comp = "";
 	Harl test;
-	test.complain(comp);
+	
+	test.complain("WARNING");
+	test.complain("ERROR");
+	test.complain("DEBUG");
+	test.complain("INFO");
 }
