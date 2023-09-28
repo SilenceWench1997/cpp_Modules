@@ -6,7 +6,7 @@
 HumanA::HumanA(std::string name, Weapon &weapREF): _weapon(weapREF)
 {
 	this->name = name;
-	std::cout << "HumanA " << name << " was created with " << weap.getType() << std::endl;
+	std::cout << "HumanA " << name << " was created with " << _weapon.getType() << std::endl;
 }
 
 HumanA::~HumanA()
