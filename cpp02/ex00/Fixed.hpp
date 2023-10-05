@@ -5,7 +5,7 @@
 
 class Fixed {
 private:
-	int					num;
+	int					fixedVal;
 	static const int	bits = 8;
 public:
 	Fixed();
@@ -13,7 +13,7 @@ public:
 	Fixed& operator=(const Fixed &src);
 	~Fixed();
 	int		getRawBits(void) const;
-	void	setRawBits(int const set);
+	void	setRawBits(int const raw);
 };
 
 #endif

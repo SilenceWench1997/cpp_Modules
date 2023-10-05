@@ -5,13 +5,13 @@
 Fixed::Fixed()
 {
 	std::cout << "Default constructor called" << std::endl;
-	this->num = 0;
+	this->fixedVal = 0;
 }
 
 Fixed::Fixed(const Fixed &src)
 {
 	std::cout << "Copy constructor called" << std::endl;
-	this->num = src.getRawBits();
+	this->fixedVal = src.getRawBits();
 }
 
 Fixed::~Fixed()
@@ -19,49 +19,59 @@ Fixed::~Fixed()
 	std::cout << "Destructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(const Fixed &src)
+//-----------Int and Float constructors------------//
+
+Fixed::Fixed(const float fl)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
-	this->num = src.getRawBits();
-	return (*this);
+	std::cout << "Float constructor called" << std::endl;
+	this->fixedVal = std::roundf(fl * (1 << this->bits));
 }
 
 Fixed::Fixed(const int n)
 {
-	this->num = n * (1 << this->bits);
 	std::cout << "Int constructor called" << std::endl;
+	this->fixedVal = n * (1 << this->bits);
 }
 
-Fixed::Fixed(const float fl)
-{
-	this->num = std::roundf(fl * (1 << this->bits));
-	std::cout << this->num;
-	std::cout << "Float constructor called" << std::endl;
-}
+//-----------------------------------------------//
 
-float	Fixed::toFloat(void) const
+Fixed& Fixed::operator=(const Fixed &src)
 {
-    return (static_cast<float>( this->getRawBits() ) / ( 1 << this->bits ));
-}
-
-int	Fixed::toInt(void) const
-{
-	return (this->num >> this->bits);
+	std::cout << "Copy assignment operator called" << std::endl;
+	this->fixedVal = src.getRawBits();
+	return (*this);
 }
 
 void	Fixed::setRawBits(int set)
 {
-	this->num = set;
+	this->fixedVal = set;
 }
 
 int	Fixed::getRawBits() const
 {
-	return (this->num);
+	return (this->fixedVal);
 }
 
+//-------------------toFloat and toInt-----------------//
 
-std::ostream& operator<<(std::ostream &ostr, const Fixed& obj)
+float	Fixed::toFloat(void) const
+{
+	return (static_cast<float>( this->getRawBits() ) / ( 1 << this->bits ));
+}
+
+int	Fixed::toInt(void) const
+{
+	return (this->fixedVal >> this->bits);
+}
+
+//------------------------------------------------------//
+
+//-------------------"<<" operator-----------------//
+
+std::ostream& operator<<(std::ostream &ostr, Fixed const& obj)
 {
 	ostr << obj.toFloat();
 	return (ostr);
 }
+
+//-------------------------------------------------//

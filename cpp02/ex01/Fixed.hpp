@@ -5,7 +5,7 @@
 
 class Fixed {
 private:
-	int					num;
+	int					fixedVal;
 	static const int	bits = 8;
 public:
 	Fixed();
@@ -21,6 +21,6 @@ public:
 	int		toInt(void) const;
 };
 
-std::ostream& operator<<(std::ostream &ostr, const Fixed& obj);
+std::ostream& operator<<(std::ostream &ostr, Fixed const& obj);
 
 #endif
