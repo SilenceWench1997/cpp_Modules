@@ -3,15 +3,16 @@
 
 int main()
 {
-	ClapTrap test0;
-	ClapTrap test1("SomeName");
-	ClapTrap test2(test0);
-	ClapTrap test3 = test1;
-
-	test0.attack("Bull");
-	test1.takeDamage(3);
-	test1.takeDamage(7);
-	test1.attack("asd");
-	test1.beRepaired(45);
-	
+	std::cout << "\n------------------Constructing------------------" << std::endl;
+	ClapTrap a;
+	ClapTrap b("Cody");
+	std::cout << "\n------------------Testing------------------" << std::endl;
+	a.attack("some other robot");
+	a.takeDamage(10);
+	a.takeDamage(10);
+	a.beRepaired(5);
+	a.attack("some other other robot");
+	b.beRepaired(3);
+	b.beRepaired(3);
+	std::cout << "\n------------------Deconstructing------------------" << std::endl;
 }

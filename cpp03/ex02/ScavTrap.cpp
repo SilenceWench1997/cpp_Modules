@@ -18,9 +18,20 @@ ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 	this->attackDamage = 20;
 }
 
+ScavTrap& ScavTrap::operator=(const ScavTrap &src){
+	std::cout << "ScavTrap '=' operator overload" << std::endl;
+
+	this->Name = src.Name;
+	this->hitPoints = src.hitPoints;
+	this->energyPoints = src.energyPoints;
+	this->attackDamage = src.attackDamage;
+
+	return (*this);
+}
+
 ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
 {
-	std::cout << "ScavTrap copy constructor called";
+	std::cout << "ScavTrap Copy constructor called" << std::endl;
 }
 
 ScavTrap::~ScavTrap()

@@ -13,11 +13,30 @@ ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 {
 	std::cout << "ScavTrap Individual name constructor called" << std::endl;
 	this->Name = Name;
+	this->hitPoints = 100;
+	this->energyPoints = 50;
+	this->attackDamage = 20;
+}
+
+ScavTrap::ScavTrap(const ScavTrap &src) : ClapTrap(src)
+{
+	std::cout << "ScavTrap copy constructor called" << std::endl;
 }
 
 ScavTrap::~ScavTrap()
 {
-	std::cout << "ScavTrap Destructor called" << std::endl;
+	std::cout << "ScavTrap destructor called" << std::endl;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap &src){
+	std::cout << "ScavTrap '=' operator overload" << std::endl;
+
+	this->Name = src.Name;
+	this->hitPoints = src.hitPoints;
+	this->energyPoints = src.energyPoints;
+	this->attackDamage = src.attackDamage;
+
+	return (*this);
 }
 
 void	ScavTrap::attack()
@@ -33,3 +52,4 @@ void	ScavTrap::guardGate()
 {
 	std::cout << "ScavTrap " << this->Name << " is now in Gate keeper mode" << std::endl;
 }
+

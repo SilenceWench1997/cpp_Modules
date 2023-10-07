@@ -27,7 +27,7 @@ ClapTrap::ClapTrap(const ClapTrap &src)
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap &src){
-	std::cout << "'=' operator overload" << std::endl;
+	std::cout << "ClapTrap '=' operator overload" << std::endl;
 
 	this->Name = src.Name;
 	this->hitPoints = src.hitPoints;
