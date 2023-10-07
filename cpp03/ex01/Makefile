@@ -6,7 +6,7 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp ClapTrap.cpp
+SRC		= main.cpp ClapTrap.cpp ScavTrap.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 HEADERS = ClapTrap.hpp
