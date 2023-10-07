@@ -1,17 +1,16 @@
 #include "FragTrap.hpp"
+
 int main()
 {
 	std::cout << "\n-----------------Constructing-----------------" << std::endl;
-	FragTrap e("test");
-	FragTrap f;
-	f = e;
+	ClapTrap *e = new FragTrap("asdfasdf");
+	
 	std::cout << "\n-----------------Testing-----------------" << std::endl;
-	e.highFiveGuys();
-	e.attack();
-	e.takeDamage(101);
-	e.takeDamage(1);
-	e.attack();
-	f.highFiveGuys();
+	e->attack("trasda");
+	e->takeDamage(101);
+	e->takeDamage(1);
+	e->attack("asdasd");
 	std::cout << "\n-----------------Deconstructing-----------------" << std::endl;
+	delete e;
 	return (0);
 }

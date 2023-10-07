@@ -17,8 +17,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap &src)
-{
+ClapTrap::ClapTrap(const ClapTrap &src){
 	std::cout << "ClapTrap Copy constructor called" << std::endl;
 
 	this->Name = src.Name;
