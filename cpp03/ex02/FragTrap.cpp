@@ -9,7 +9,7 @@ FragTrap::FragTrap()
 	this->attackDamage = 30;
 }
 
-FragTrap::FragTrap(std::string name) : ScavTrap(name)
+FragTrap::FragTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "FragTrap Individual name constructor called" << std::endl;
 	this->hitPoints = 100;
@@ -17,7 +17,7 @@ FragTrap::FragTrap(std::string name) : ScavTrap(name)
 	this->attackDamage = 30;
 }
 
-FragTrap::FragTrap(const FragTrap &src) : ScavTrap(src)
+FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 {
 	std::cout << "FragTrap Copy constructor called" << std::endl;
 }
