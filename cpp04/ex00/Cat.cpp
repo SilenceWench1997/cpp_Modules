@@ -13,3 +13,13 @@ Cat::Cat(const Cat &src){
 Cat::~Cat(){
 	std::cout << "Cat Destructor called" << std::endl;
 }
+
+void	Cat::makeSound() const
+{
+	std::cout << "*Cat noises*" << std::endl;
+}
+
+Cat & Cat::operator=(const Cat &ref){
+	this->type = ref.type;
+	return (*this);
+}

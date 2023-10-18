@@ -13,3 +13,13 @@ Dog::Dog(const Dog &src){
 Dog::~Dog(){
 	std::cout << "Dog Destructor called" << std::endl;
 }
+
+void	Dog::makeSound() const
+{
+	std::cout << "*Dog noises*" << std::endl;
+}
+
+Dog & Dog::operator=(const Dog &ref){
+	this->type = ref.type;
+	return (*this);
+}

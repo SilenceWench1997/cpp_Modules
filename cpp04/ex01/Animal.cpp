@@ -20,12 +20,10 @@ std::string	Animal::getType() const
 
 void	Animal::makeSound() const
 {
-	if (this->type == "Dog")
-	{
-		std::cout << "Bark" << std::endl;
-	}
-	else if (this->type == "Cat")
-	{
-		std::cout << "Meow" << std::endl;
-	}
+	std::cout << "*Regular animal noises*" << std::endl;
+}
+
+Animal & Animal::operator=(const Animal &ref){
+	this->type = ref.type;
+	return (*this);
 }
