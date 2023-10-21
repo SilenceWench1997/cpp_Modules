@@ -1,7 +1,7 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-
+#include <cstdlib>
 int main()
 {
 	Dog basic;
