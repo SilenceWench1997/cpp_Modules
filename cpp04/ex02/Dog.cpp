@@ -1,12 +1,11 @@
 #include "Dog.hpp"
 
-Dog::Dog(){
+Dog::Dog() : brain(new Brain){
 	std::cout << "Dog Default Constructor called" << std::endl;
-	this->brain = new Brain;
 	this->type = "Dog";
 }
 
-Dog::Dog(const Dog &src){
+Dog::Dog(const Dog &src) : brain(new Brain(*(src.brain))) {
 	std::cout << "Dog Copy Constructor called" << std::endl;
 	this->type = src.type;
 }
@@ -22,6 +21,8 @@ void	Dog::makeSound() const
 }
 
 Dog & Dog::operator=(const Dog &ref){
+	std::cout << "Dog '=' operator overload" << std::endl;
 	this->type = ref.type;
+	*brain = *ref.brain;
 	return (*this);
 }

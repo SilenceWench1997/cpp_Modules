@@ -6,10 +6,10 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp Dog.cpp Cat.cpp WrongCat.cpp Animal.cpp WrongAnimal.cpp Brain.cpp
+SRC		= main.cpp Dog.cpp Cat.cpp AAnimal.cpp Brain.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-HEADERS = Dog.hpp Cat.hpp WrongCat.hpp Animal.hpp WrongAnimal.hpp Brain.hpp
+HEADERS = Dog.hpp Cat.hpp AAnimal.hpp Brain.hpp
 
 all: $(NAME)
 
