@@ -1,3 +1,6 @@
+#ifndef ICHARACTER_HPP
+# define ICHARACTER_HPP
+
 class ICharacter
 {
 public:
@@ -7,3 +10,5 @@ public:
 	virtual void unequip(int idx) = 0;
 	virtual void use(int idx, ICharacter& target) = 0;
 };
+
+#endif
