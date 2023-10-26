@@ -4,8 +4,9 @@
 #include <iostream>
 #include "ICharacter.hpp"
 
-class AMateria
-{
+class ICharacter;
+
+class AMateria{
 protected:
 	std::string type;
 public:

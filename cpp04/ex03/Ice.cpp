@@ -24,3 +24,12 @@ Ice & Ice::operator=(const Ice &ref){
 	type = ref.type;
 	return (*this);
 }
+
+void Ice::use(ICharacter &target){
+	std::cout << "* shoots an ice bolt at " << target.name << "*" std::endl;
+}
+
+Ice *Ice::clone() const{
+	Ice *clone = new Ice;
+	return (clone)
+}

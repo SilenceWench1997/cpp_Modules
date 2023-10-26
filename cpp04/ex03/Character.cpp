@@ -49,9 +49,11 @@ void Character::equip(AMateria *m){
 		if (!inv[i])
 			inv[i] = *m;
 	}
+	if (i == 4)
+		std::cout << "Inventory is full, unequip one of the materias first" << std::endl;
 }
 
-void Character::unequip(int idx)
+void Character::unequip(int idx)/////////////////////////////////
 {
 	if (idx >= 4 || idx < 0)
 		std::cout << "invalid index" << std::endl;
@@ -65,5 +67,5 @@ void Character::unequip(int idx)
 void Character::use(int idx, ICharacter &target){
 	if (idx >= 4 || idx < 0 || !inv[idx])
 		std::cout << "invalid index" << std::endl;
-	
+	inv[i].use(target);
 }

@@ -6,10 +6,10 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp
+SRC		= main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-HEADERS = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp
+HEADERS = AMateria.hpp Ice.hpp Cure.hpp ICharacter.hpp Character.hpp MateriaSource.hpp IMateriaSource.hpp
 
 all: $(NAME)
 

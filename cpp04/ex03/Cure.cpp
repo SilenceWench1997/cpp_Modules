@@ -24,3 +24,12 @@ Cure & Cure::operator=(const Cure &ref){
 	type = ref.type;
 	return (*this);
 }
+
+void Cure::use(ICharacter &target){
+	std::cout << "* heals " << target.name << "'s wounds *" std::endl;
+}
+
+Cure *Cure::clone() const{
+	Cure *clone = new Cure;
+	return (clone)
+}

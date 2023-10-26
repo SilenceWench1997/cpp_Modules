@@ -29,16 +29,8 @@ AMateria & AMateria::operator=(const AMateria &ref){
 	return (*this);
 }
 
-AMateria *AMateria::clone() const{
-	AMateria *ret = new AMateria(this->tpye);
-	return (ret);
-}
-
 void AMateria::use(ICharacter &target){
-	if (type == "ice")
-		std::cout << "* shoots an ice bolt at " << target.name << "*" std::endl;
-	else if (type == "cure")
-		std::cout << "* heals " << target.name << "'s wounds *" std::endl;
+	(void)target;
 }
 
 std::string const & AMateria::getType() const
