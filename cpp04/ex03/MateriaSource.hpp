@@ -2,8 +2,12 @@
 
 class MateriaSource : public IMateriaSource{
 private:
-	
+	AMateria *materias[4];
 public:
-	void learnMateria(AMateria *);
+	MateriaSource();
+	MateriaSource(const MateriaSource &ref);
+	~MateriaSource();
+	MateriaSource & operator=(const MateriaSource &ref);
+	void learnMateria(AMateria *ptr);
 	AMateria *createMateria(std::string const & type);
 };

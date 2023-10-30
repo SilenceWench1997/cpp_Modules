@@ -6,8 +6,9 @@
 
 class Character : public ICharacter{
 private:
-	std::string name;
-	AMateria *inv;
+	std::string	name;
+	AMateria	*inv[4];
+	int			invCount;
 public:
 	Character();
 	Character(std::string name);

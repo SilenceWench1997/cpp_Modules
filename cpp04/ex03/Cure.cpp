@@ -26,10 +26,10 @@ Cure & Cure::operator=(const Cure &ref){
 }
 
 void Cure::use(ICharacter &target){
-	std::cout << "* heals " << target.name << "'s wounds *" std::endl;
+	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
 }
 
 Cure *Cure::clone() const{
 	Cure *clone = new Cure;
-	return (clone)
+	return (clone);
 }

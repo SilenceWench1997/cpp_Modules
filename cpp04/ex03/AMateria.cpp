@@ -10,7 +10,7 @@ AMateria::AMateria(std::string const & type){
 	this->type = type;
 }
 
-AMateria(const AMateria &ref){
+AMateria::AMateria(const AMateria &ref){
 	std::cout << "AMateria copy constructor called" << std::endl;
 	type = ref.type;
 }
@@ -20,9 +20,9 @@ AMateria::~AMateria(){
 }
 
 AMateria & AMateria::operator=(const AMateria &ref){
-	std::cout << "AMateria '=' operator overload" std::endl;
+	std::cout << "AMateria '=' operator overload" << std::endl;
 	if(this == &ref){
-		std::cout << "Same materia" << std::endl:
+		std::cout << "Same materia" << std::endl;
 		return (*this);
 	}
 	type = ref.type;
