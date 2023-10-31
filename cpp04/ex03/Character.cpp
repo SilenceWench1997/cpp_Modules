@@ -1,4 +1,6 @@
 #include "Character.hpp"
+#include "Bezdna.hpp"
+
 
 Character::Character() : name("default"), invCount(0){
 	std::cout << "Character default constructor called" << std::endl;
@@ -47,25 +49,28 @@ std::string const & Character::getName() const{
 }
 
 void Character::equip(AMateria *m){
-	std::cout << "Character" << name << "equips materia" << std::endl;
+	std::cout << "Character " << name << " is trying to equip materia " << m->getType() << std::endl;
 	for (int i = 0; i < 4; i++){
 		if (!inv[i])
 		{
 			inv[i] = m;
 			invCount++;
-			break ;
+			std::cout << "Equiped successfully!" << std::endl;
+			return ;
 		}
 	}
+	std::cout << "Failed to equip" << std::endl;
 }
 
-void Character::unequip(int idx)/////////////////////////////////
+void Character::unequip(int idx)
 {
-	if (idx >= 4 || idx < 0)
-		std::cout << "invalid index" << std::endl;
+	if (idx >= 4 || idx < 0 || !inv[idx])
+		std::cout << "Invalid index to unequip" << std::endl;
 	else
 	{
-		std::cout << "Character" << name << "unequips materia" << std::endl;
-		
+		std::cout << "Character " << name << " unequips materia " << inv[idx]->getType() << " and throws it to bezdna" << std::endl;
+		Bezdna::throwToBezdna(inv[idx]);
+		inv[idx] = NULL;
 	}
 }
 

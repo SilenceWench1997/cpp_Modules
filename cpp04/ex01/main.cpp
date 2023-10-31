@@ -2,6 +2,7 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 #include <cstdlib>
+
 int main()
 {
 	Dog basic;
@@ -36,6 +37,6 @@ int main()
 
 	for (int i = 0; i < 4; i++)
 		delete animal_array[i];
-	system("leaks animal");
+	// system("leaks animal");
     return 0;
 }

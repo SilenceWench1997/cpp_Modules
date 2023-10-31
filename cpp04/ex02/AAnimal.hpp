@@ -9,9 +9,9 @@ protected:
 public:
 	AAnimal();
 	AAnimal(const AAnimal &src);
-	virtual ~AAnimal() = 0;
+	virtual ~AAnimal();
 	virtual std::string getType() const;
-	virtual void makeSound() const;
+	virtual void makeSound() const = 0;
 	AAnimal &operator=(const AAnimal &ref);
 };
 
