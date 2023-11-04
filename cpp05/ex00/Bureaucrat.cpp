@@ -4,21 +4,15 @@ Bureaucrat::Bureaucrat() : name("default"), grade(150) {
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-
 Bureaucrat::Bureaucrat(const Bureaucrat &ref) : name(ref.name), grade(ref.grade) {
 	std::cout << "Bureaucrat copy constructor calledd" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(int grade) : name("default"), grade(grade){
-	std::cout << "Bureaucrat grade constructor called" << std::endl;
-}
-
-Bureaucrat::Bureaucrat(std::string name) : name(name), grade(grade){
-	std::cout << "Bureaucrat name constructor called" << std::endl;
-}
-
 Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade){
 	std::cout << "Bureaucrat universal constructor called" << std::endl;
+	if (grade < 1){
+		throw gradeException("Grade too low");
+	}
 }
 
 Bureaucrat::~Bureaucrat(){
