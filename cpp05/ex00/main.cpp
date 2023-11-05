@@ -2,9 +2,13 @@
 
 int main(){
 	try{
-		Bureaucrat("test", 25);
+		Bureaucrat bur("test", 150);
+		std::cout << bur << std::flush;
 	}
-	catch{
-		
+	catch(const Bureaucrat::gradeTooHighException& ex){
+		std::cout << ex.what() << std::endl;
+	}
+	catch(const Bureaucrat::gradeTooLowException& ex){
+		std::cout << ex.what() << std::endl;
 	}
 }

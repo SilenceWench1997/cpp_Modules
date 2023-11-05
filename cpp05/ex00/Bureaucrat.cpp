@@ -11,7 +11,10 @@ Bureaucrat::Bureaucrat(const Bureaucrat &ref) : name(ref.name), grade(ref.grade)
 Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade){
 	std::cout << "Bureaucrat universal constructor called" << std::endl;
 	if (grade < 1){
-		throw gradeException("Grade too low");
+		throw gradeTooHighException();
+	}
+	else if (grade > 150){
+		throw gradeTooLowException();
 	}
 }
 
@@ -21,19 +24,17 @@ Bureaucrat::~Bureaucrat(){
 
 Bureaucrat & Bureaucrat::operator=(const Bureaucrat &ref){
 	std::cout << "Bureaucrat '=' operator overload" << std::endl;
-	this->name = ref.name;
-	this->grade = ref.grade;
+	name = ref.name;
+	grade = ref.grade;
+	return (*this);
 }
 
-std::ostream & Bureaucrat::operator<<(std::ostream &os){
-	os << "name: " << this->name << "\ngrade: " << this->grade << std::endl;
-}
 
-const std::string Bureaucrat::getName(){
+const std::string Bureaucrat::getName() const{
 	return (this->name);
 }
 
-int	Bureaucrat::getGrade(){
+int	Bureaucrat::getGrade() const{
 	return (this->grade);
 }
 
@@ -43,4 +44,9 @@ void Bureaucrat::incGrade(){
 
 void Bureaucrat::decGrade(){
 	grade++;
+}
+
+std::ostream & operator<<(std::ostream &os, const Bureaucrat &ref){
+	os << "name: " << ref.getName() << "\ngrade: " << ref.getGrade() << std::endl;
+	return (os);
 }

@@ -1,4 +1,4 @@
-NAME	=	ex03
+NAME	=	ex00
 
 CC		= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
