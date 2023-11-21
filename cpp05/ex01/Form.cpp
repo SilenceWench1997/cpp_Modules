@@ -38,8 +38,8 @@ void	Form::beSigned(const Bureaucrat &ref){
 	if (ref.getGrade() > gradeSign){
 		throw Form::GradeTooLowException();
 	}
-	else if (ref.getGrade() < gradeSign){
-		throw Form::GradeTooHighException();
+	else{
+		this->isSigned = 1;
 	}
 }
 

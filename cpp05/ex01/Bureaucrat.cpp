@@ -46,6 +46,15 @@ void Bureaucrat::decGrade(){
 	grade++;
 }
 
+void Bureaucrat::signForm(Form &ref){
+	try{
+		ref.beSigned(*this);
+	}
+	catch{
+		
+	}
+}
+
 std::ostream & operator<<(std::ostream &os, const Bureaucrat &ref){
 	os << "name: " << ref.getName() << "\ngrade: " << ref.getGrade() << std::endl;
 	return (os);

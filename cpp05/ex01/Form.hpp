@@ -3,6 +3,8 @@
 
 #include "Bureaucrat.hpp"
 
+class Bureaucrat;
+
 class Form{
 private:
 	const std::string name;
@@ -19,13 +21,13 @@ public:
 	int	getGradeSign() const;
 	int	getGradeExec() const;
 	void	beSigned(const Bureaucrat &ref);
-	class GradeTooHighException{
+	class GradeTooHighException : std::exception{
 	public:
 		virtual const char *what() const _NOEXCEPT{
 			return "Form: Grade too high!";
 		}
 	};
-	class GradeTooLowException{
+	class GradeTooLowException : std::exception{
 	public:
 		virtual const char *what() const _NOEXCEPT{
 			return "Form: Grade too low!";
