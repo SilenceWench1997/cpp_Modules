@@ -17,15 +17,16 @@ public:
 	int	getGrade() const;
 	void incGrade();
 	void decGrade();
+	void setGrade(int grade);
 	class	gradeTooHighException : public std::exception{
 	public:
-		virtual const char *what() const _NOEXCEPT{
+		virtual const char *what() const noexcept{
 			return "Grade too high!";
 		}
 	};
 	class	gradeTooLowException :  public std::exception{
 	public:
-		virtual const char *what() const _NOEXCEPT{
+		virtual const char *what() const noexcept{
 			return "Grade too low!";
 		}
 	};

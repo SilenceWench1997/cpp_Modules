@@ -2,7 +2,7 @@
 
 int main(){
 	try{
-		Bureaucrat bur("test", 150);
+		Bureaucrat bur("test", 151);
 		std::cout << bur << std::flush;
 	}
 	catch(const Bureaucrat::gradeTooHighException& ex){
