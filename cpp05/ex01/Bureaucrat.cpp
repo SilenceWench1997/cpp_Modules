@@ -8,18 +8,13 @@ Bureaucrat::Bureaucrat(const Bureaucrat &ref) : name(ref.name), grade(ref.grade)
 	std::cout << "Bureaucrat copy constructor calledd" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade){
-	std::cout << "Bureaucrat universal constructor called" << std::endl;
-	if (grade < 1){
-		throw gradeTooHighException();
-	}
-	else if (grade > 150){
-		throw gradeTooLowException();
-	}
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name){
+	std::cout << "Bureaucrat custom constructor called" << std::endl;
+	setGrade(grade);
 }
 
 Bureaucrat::~Bureaucrat(){
-	std::cout << "Bureaucrat destructor calledd" << std::endl;
+	std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
 Bureaucrat & Bureaucrat::operator=(const Bureaucrat &ref){
@@ -39,20 +34,24 @@ int	Bureaucrat::getGrade() const{
 }
 
 void Bureaucrat::incGrade(){
-	grade--;
+	setGrade(grade - 1);
 }
 
 void Bureaucrat::decGrade(){
-	grade++;
+	setGrade(grade + 1);
+}
+
+void Bureaucrat::setGrade(int grade){
+	if (grade > 150)
+		throw (Bureaucrat::gradeTooLowException());
+	else if (grade < 1)
+		throw (Bureaucrat::gradeTooHighException());
+	this->grade = grade;
 }
 
 void Bureaucrat::signForm(Form &ref){
-	try{
-		ref.beSigned(*this);
-	}
-	catch{
-		
-	}
+	std::cout << "Bureaucrat \"" << name << "\" is trying to sign the form \"" << ref.getName() << "\"" << std::endl;
+	ref.beSigned(*this);
 }
 
 std::ostream & operator<<(std::ostream &os, const Bureaucrat &ref){
