@@ -14,6 +14,7 @@ public:
 	~ShrubberyCreationForm();
 	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &ref);
 	void execute(Bureaucrat const & executor) const;
+	static	AForm *clone(std::string target);
 };
 
 #endif

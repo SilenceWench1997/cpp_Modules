@@ -13,6 +13,7 @@ public:
 	~PresidentialPardonForm();
 	PresidentialPardonForm &operator=(const PresidentialPardonForm &ref);
 	void execute(Bureaucrat const & executor) const;
+	static AForm *clone(std::string target);
 };
 
 #endif

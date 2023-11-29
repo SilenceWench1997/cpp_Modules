@@ -13,6 +13,7 @@ public:
 	~RobotomyRequestForm();
 	RobotomyRequestForm &operator=(const RobotomyRequestForm &ref);
 	void execute(Bureaucrat const & executor) const;
+	static	AForm *clone(std::string target);
 };
 
 #endif

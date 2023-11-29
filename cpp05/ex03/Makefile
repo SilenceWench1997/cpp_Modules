@@ -1,4 +1,4 @@
-NAME	=	ex02
+NAME	=	ex03
 
 CC		= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++11  #-fsanitize=address -g
@@ -6,10 +6,10 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRC		= main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-HEADERS = Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp
+HEADERS = Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp Intern.hpp
 
 all: $(NAME)
 

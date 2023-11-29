@@ -5,20 +5,20 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm("SCF", 0, 145, 137), targ
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("SCF", 0, 145, 137), target(target){
-	std::cout << "Shrubberry Creation Form  constructor called" << std::endl;
+	std::cout << "Shrubberry Creation Form constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ref) : AForm(ref){
-	std::cout << "Shrubberry Creation Form  copy constructor called" << std::endl;
+	std::cout << "Shrubberry Creation Form copy constructor called" << std::endl;
 	target = ref.target;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(){
-	std::cout << "Shrubberry Creation Form  destructor called" << std::endl;
+	std::cout << "Shrubberry Creation Form destructor called" << std::endl;
 }
 
 ShrubberyCreationForm & ShrubberyCreationForm::operator=(const ShrubberyCreationForm &ref){
-	std::cout << "Shrubberry Creation Form  '=' overload" << std::endl;
+	std::cout << "Shrubberry Creation Form '=' overload" << std::endl;
 	target = ref.target;
 	return (*this);
 }
@@ -60,6 +60,11 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 			oFile << "                          ...;%@@@@@%%:;;;;,..                   " << std::endl;
 			oFile << "      ###########################################################" << std::endl;
 		}
-		std::cout << "Executed Successfully!, run \"cat 	" << target << "_shrubbery\" to see the result" << std::endl;
 	}
+}
+
+AForm *ShrubberyCreationForm::clone(std::string target){
+	std::cout << "Shrubbery Creation Form clone called" << std::endl;
+	AForm *ptr = new ShrubberyCreationForm(target);
+	return (ptr);
 }
