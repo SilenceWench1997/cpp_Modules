@@ -43,9 +43,9 @@ void Bureaucrat::decGrade(){
 
 void Bureaucrat::setGrade(int grade){
 	if (grade > 150)
-		throw (Bureaucrat::gradeTooLowException());
+		throw (gradeTooLowException());
 	else if (grade < 1)
-		throw (Bureaucrat::gradeTooHighException());
+		throw (gradeTooHighException());
 	this->grade = grade;
 }
 

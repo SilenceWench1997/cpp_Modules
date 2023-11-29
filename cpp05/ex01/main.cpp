@@ -1,8 +1,8 @@
 #include "Bureaucrat.hpp"
 
 int main(){
-	Bureaucrat bur("test", 2);
-	Form f("form", 0, 151, 4);
+	Bureaucrat bur("test", 141);
+	Form f("form", 0, 140, 4);
 	try{
 		bur.signForm(f);
 	}

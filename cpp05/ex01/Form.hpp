@@ -18,12 +18,10 @@ public:
 	Form &operator=(const Form &ref);
 	~Form();
 	std::string	getName() const;
-	bool	getIsSigned() const;
-	int	getGradeSign() const;
-	int	getGradeExec() const;
-	void	setGradeExec(int grade);
-	void	setGradeSign(int grade);
-	void	beSigned(const Bureaucrat &ref);
+	bool		getIsSigned() const;
+	int			getGradeSign() const;
+	int			getGradeExec() const;
+	void		beSigned(const Bureaucrat &ref);
 	class GradeTooHighException : std::exception{
 	public:
 		virtual const char *what() const noexcept{

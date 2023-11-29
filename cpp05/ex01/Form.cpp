@@ -16,6 +16,12 @@ Form &Form::operator=(const Form &ref){
 
 Form::Form(const std::string name, bool iS, const int gS, const int gE) : name(name), isSigned(iS), gradeSign(gS), gradeExec(gE){
 	std::cout << "Form custom constructor called" << std::endl;
+	if (gS > 150 || gE > 150){
+		throw (GradeTooLowException());
+	}
+	else if (gS < 1 || gE < 1){
+		throw(GradeTooHighException());
+	}
 }
 
 Form::~Form(){
@@ -41,7 +47,7 @@ int Form::getGradeExec() const{
 void	Form::beSigned(const Bureaucrat &ref){
 	if (ref.getGrade() > gradeSign){
 		std::cout << "Could not sign, because grade is too low" << std::endl;
-		throw Form::GradeTooLowException();
+		throw GradeTooLowException();
 	}
 	this->isSigned = 1;
 	std::cout << "Signed successfully!" << std::endl;
