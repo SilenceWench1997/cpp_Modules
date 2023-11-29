@@ -51,12 +51,25 @@ void Bureaucrat::setGrade(int grade){
 
 void Bureaucrat::signForm(AForm &ref){
 	std::cout << "Bureaucrat \"" << name << "\" is trying to sign the Aform \"" << ref.getName() << "\"" << std::endl;
-	ref.beSigned(*this);
+	try{
+		ref.beSigned(*this);
+	}
+	catch(const AForm::GradeTooLowException & ex){
+		std::cout << "Bureaucrat " << this->getName() << " failed to sign the form " << ref.getName() << " cause: " << ex.what() << std::endl;
+	}
 }
 
 void Bureaucrat::executeForm(AForm &ref){
 	std::cout << "Bureaucrat \"" << name << "\" is trying to execute the Aform \"" << ref.getName() << "\"" << std::endl;
-	ref.execute(*this);
+	try{	
+		ref.execute(*this);
+	}
+	catch(const AForm::GradeTooLowException &ex){
+		std::cout << "Bureaucrat " << this->getName() << " failed to execute the form " << ref.getName() << " cause: " << ex.what() << std::endl;
+	}
+	catch(const AForm::FormNotSignedException &ex){	
+		std::cout << "Bureaucrat " << this->getName() << " failed to execute the form " << ref.getName() << " cause: " << ex.what() << std::endl;
+	}
 }
 
 std::ostream & operator<<(std::ostream &os, const Bureaucrat &ref){

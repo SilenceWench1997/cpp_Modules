@@ -31,8 +31,10 @@ AForm  *Intern::makeForm(std::string name, std::string target){
 	nameArr[2] = "presidential pardon";
 	for(int i = 0; i < 4; i++){
 		if (nameArr[i] == name){
+			std::cout << "Intern Creates " << name << std::endl;
 			return(functArr[i](target));
 		}
 	}
+	std::cout << "Error: Invalid name" << std::endl;
 	return (NULL);
 }

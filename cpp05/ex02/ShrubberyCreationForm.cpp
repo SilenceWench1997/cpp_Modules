@@ -60,6 +60,6 @@ void	ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
 			oFile << "                          ...;%@@@@@%%:;;;;,..                   " << std::endl;
 			oFile << "      ###########################################################" << std::endl;
 		}
-		std::cout << "Executed Successfully!, run \"cat 	" << target << "_shrubbery\" to see the result" << std::endl;
+		std::cout << "Executed Successfully!, run \"cat " << target << "_shrubbery\" to see the result" << std::endl;
 	}
 }

@@ -4,7 +4,7 @@
 #include "RobotomyRequestForm.hpp"
 
 int main(){
-	Bureaucrat bur("bureau", 3);
+	Bureaucrat bur("bureau", 29);
 	ShrubberyCreationForm scf("scrub");
 	PresidentialPardonForm ppf("targ");
 	RobotomyRequestForm rrf("smth");

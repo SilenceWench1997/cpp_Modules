@@ -26,13 +26,13 @@ public:
 	class GradeTooHighException : std::exception{
 	public:
 		virtual const char *what() const noexcept{
-			return "AForm: Grade too high!";
+			return "Grade too high!";
 		}
 	};
 	class GradeTooLowException : std::exception{
 	public:
 		virtual const char *what() const noexcept{
-			return "AForm: Grade too low!";
+			return "Grade too low!";
 		}
 	};
 	class FormNotSignedException : std::exception{

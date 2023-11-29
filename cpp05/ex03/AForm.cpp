@@ -46,7 +46,6 @@ int AForm::getGradeExec() const{
 
 void	AForm::beSigned(const Bureaucrat &ref){
 	if (ref.getGrade() > gradeSign){
-		std::cout << "Could not sign, because grade is too low" << std::endl;
 		throw AForm::GradeTooLowException();
 	}
 	this->isSigned = 1;
