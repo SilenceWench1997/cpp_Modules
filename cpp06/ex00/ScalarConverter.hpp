@@ -2,6 +2,7 @@
 #define SC_CONV_HPP
 
 #include <iostream>
+#include <sstream>
 
 enum returnVal{
 	INT = 0,
