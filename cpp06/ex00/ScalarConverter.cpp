@@ -1,8 +1,13 @@
 #include "ScalarConverter.hpp"
 
-bool intCheck(std::string str){
+int ScalarConverter::intVal = 0;
+char ScalarConverter::chVal = 0;
+double ScalarConverter::doubVal = 0;
+float ScalarConverter::flVal = 0;
+
+bool  ScalarConverter::intCheck(const std::string &str){
 	std::istringstream conv(str);
-	int intVal;
+
 	if(conv >> intVal)
 		;
 	else
@@ -12,22 +17,19 @@ bool intCheck(std::string str){
 		if (str[i] < '0' || str[i] > '9')
 			return (false);
 	}
-	std::cout << "INT!" << std::endl;
 	return (true);
 }
 
-
-bool charCheck(std::string str){
+bool  ScalarConverter::charCheck(const std::string &str){
 	if (str.length() != 3 || str[0] != '\'' || str[2] != '\'')
 		return (false);
-	std::cout << "CHAR!" << std::endl;
+	chVal = str[1];
 	return (true);
 }
 
-bool doubleCheck(std::string str){
+bool  ScalarConverter::doubleCheck(const std::string &str){
 	bool	dot;
 	std::istringstream conv(str);
-	double	doubVal;
 	
 	if (conv >> doubVal)
 		;
@@ -42,16 +44,14 @@ bool doubleCheck(std::string str){
 			return (false);
 		}
 	}
-	std::cout << "DOUBLE!" << std::endl;
 	return (true);
 }
 
-bool floatCheck(std::string str){
+bool  ScalarConverter::floatCheck(const std::string &str){
 	bool dot = false;
 	bool f = false;
 	std::istringstream conv(str);
-	float flVal;
-
+	
 	if (conv >> flVal)
 		;
 	else
@@ -69,11 +69,10 @@ bool floatCheck(std::string str){
 			return (false);
 		}
 	}
-	std::cout << "FLOAT!" << std::endl;	
 	return (true);
 }
 
-int figureType(const std::string literal){
+int ScalarConverter::figureType(const std::string &literal){
 	if (intCheck(literal))
 		return INT;
 	else if (charCheck(literal))
@@ -82,45 +81,102 @@ int figureType(const std::string literal){
 		return DOUBLE;
 	else if (floatCheck(literal))
 		return FLOAT;
-//	else
-//		throw (ScalarConverter::invalidInput());
-	return (9);
+	else
+		throw (ScalarConverter::invalidInput());
 }
 
-void	toInt(std::string conv){
-(void)conv;
+void	ScalarConverter::printChar(double val){
+	if(val >= 32 && val <= 126)
+		std::cout << "char: " << static_cast<char>(val) << std::endl;
+	else if ((val < 32 && val >= 0) || val == 127)
+		std::cout << "char: " << "Non Displayable" << std::endl;
+	else
+		std::cout << "char: Impossible" << std::endl;
 }
 
-void	toChar(std::string conv){
-(void)conv;
+void	ScalarConverter::printDouble(double val){
+	std::stringstream strstr;
+	std::string	  result;
+	
+	strstr << val;
+	result = strstr.str();
+	if (result.find('e') == std::string::npos)
+		std::cout << "Double: " << static_cast<double>(intVal) << ".0"<< std::endl;
+	else	
+		std::cout << "Double: " << static_cast<double>(intVal) << std::endl;
+
 }
 
-void	toDouble(std::string conv){
-(void)conv;
+void	ScalarConverter::printFloat(double val, const std::string &type){
+	std::stringstream strstr;
+	std::string 	  result;
+	
+	
+	if (val < std::numeric_limits<float>::min() || val > std::numeric_limits<float>::max()){
+		std::cout << "Float: Impossible" << std::endl; 
+		return ;
+	}
+	strstr << val;
+	result = strstr.str();
+	if (result.find('e') == std::string::npos)
+		std::cout << "Float: " << static_cast<float>(val) << ".0f" << std::endl;
+	else
+		std::cout << "Float: " << static_cast<float>(val) << std::endl;
 }
 
-void	toFloat(std::string conv){
-(void)conv;
+void	ScalarConverter::printInt(double val){
+	if (val < std::numeric_limits<int>::min() || val > std::numeric_limits<int>::max())
+		std::cout << "Int: Impossible" << std::endl;
+	else
+		std::cout << "Int: " << static_cast<int>(val) << std::endl;
 }
 
-void	ScalarConverter::convert(const std::string literal){
-//	try {
+void	ScalarConverter::caseInt(void){
+	printChar(static_cast<double>(intVal));
+	std::cout << "Int: " << intVal << std::endl;
+	printDouble(static_cast<double>(intVal));
+	printFloat(static_cast<float>(intVal), "int");
+}
+
+void	 ScalarConverter::caseChar(void){
+	std::cout << "Char: " << chVal << std::endl; 
+	std::cout << "Int: " << static_cast<int>(chVal) << std::endl;
+	std::cout << "Double: " << static_cast<double>(chVal) << ".0" <<std::endl;
+	std::cout << "Float: " << static_cast<float>(chVal) << ".0f" << std::endl;
+}
+
+void	 ScalarConverter::caseDouble(void){
+	printChar(doubVal);
+	printInt(doubVal);
+	printDouble(doubVal);
+	printFloat(doubVal, "double");
+}
+
+void	 ScalarConverter::caseFloat(void){
+	printChar(static_cast<double>(flVal));
+	printInt(static_cast<double>(flVal));
+	printDouble(static_cast<double>(flVal));
+	printFloat(static_cast<double>(flVal), "float");
+}
+
+void	ScalarConverter::convert(const std::string &literal){
+	try {
 		switch(figureType(literal)){
 			case INT:
-				toInt(literal);
+				caseInt();
 				break ;
 			case CHAR:
-				toChar(literal);
+				caseChar();
 				break ;
 			case DOUBLE:
-				toDouble(literal);
+				caseDouble();
 				break ;
 			case FLOAT:
-				toFloat(literal);
+				caseFloat();
 				break ;
 		}
-//	}
-//	catch (const ScalarConverter::impossibleException &e){
-//		std::cout << e.what() << std::endl;
-//	}
+	}
+	catch (const ScalarConverter::invalidInput &e){
+		std::cout << e.what() << std::endl;
+	}
 }

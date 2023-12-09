@@ -3,24 +3,46 @@
 
 #include <iostream>
 #include <sstream>
-
-enum returnVal{
-	INT = 0,
-	CHAR = 1,
-	FLOAT = 2,
-	DOUBLE = 3,
-};
+#include <limits>
 
 class ScalarConverter{
 private:
-	std::string type;
-public:
+	static int	intVal;
+	static char	chVal;
+	static double	doubVal;
+	static float	flVal;
+	enum returnVal{
+		INT,
+		CHAR,
+		FLOAT,
+		DOUBLE,
+	};
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &ref);
 	ScalarConverter &operator=(const ScalarConverter &ref);
-	virtual ~ScalarConverter() = 0;
-	
-	static void convert(std::string literal);
+	~ScalarConverter();
+	class invalidInput : public std::exception{
+	public:
+		virtual const char *what() const throw(){
+			return "Invalid input";
+		} 
+	};
+	static int  figureType(const std::string &literal);
+	static bool intCheck(const std::string &str);
+	static bool charCheck(const std::string &str);
+	static bool doubleCheck(const std::string &str);
+	static bool floatCheck(const std::string &str);
+	static void caseInt(void);
+	static void caseChar(void);
+	static void caseDouble(void);
+	static void caseFloat(void);
+	static void printChar(double val);
+	static void printInt(double val);
+	static void printDouble(double val);
+	static void printFloat(double val, const std::string &type);
+public:
+	static void convert(const std::string &literal);
+
 };
 
 #endif
