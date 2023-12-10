@@ -6,6 +6,14 @@ double ScalarConverter::doubVal = 0;
 float ScalarConverter::flVal = 0;
 ScalarConverter::Pseudos ScalarConverter::ps = ScalarConverter::NINFF;
 
+ScalarConverter::ScalarConverter(){};
+
+ScalarConverter::ScalarConverter(const ScalarConverter &ref){ *this = ref;}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &ref){ *this = ref; return (*this);}
+
+ScalarConverter::~ScalarConverter(){}
+
 bool  ScalarConverter::intCheck(const std::string &str){
 	std::istringstream conv(str);
 
