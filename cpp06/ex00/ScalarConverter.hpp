@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <limits>
+#include <cmath>
 
 class ScalarConverter{
 private:
@@ -11,12 +12,22 @@ private:
 	static char	chVal;
 	static double	doubVal;
 	static float	flVal;
-	enum returnVal{
+	enum ReturnVal{
 		INT,
 		CHAR,
 		FLOAT,
 		DOUBLE,
+		PSEUDO,
 	};
+	enum Pseudos{
+		NINFF,
+		PINFF,
+		NANF_,
+		NINF,
+		PINF,
+		NAN_,
+	};
+	static Pseudos ps;
 	ScalarConverter();
 	ScalarConverter(const ScalarConverter &ref);
 	ScalarConverter &operator=(const ScalarConverter &ref);
@@ -32,14 +43,16 @@ private:
 	static bool charCheck(const std::string &str);
 	static bool doubleCheck(const std::string &str);
 	static bool floatCheck(const std::string &str);
+	static bool pseudoCheck(const std::string &literal);
 	static void caseInt(void);
 	static void caseChar(void);
 	static void caseDouble(void);
 	static void caseFloat(void);
+	static void casePseudo(void);
 	static void printChar(double val);
 	static void printInt(double val);
 	static void printDouble(double val);
-	static void printFloat(double val, const std::string &type);
+	static void printFloat(double val);
 public:
 	static void convert(const std::string &literal);
 

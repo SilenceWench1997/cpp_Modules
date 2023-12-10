@@ -4,6 +4,7 @@ int ScalarConverter::intVal = 0;
 char ScalarConverter::chVal = 0;
 double ScalarConverter::doubVal = 0;
 float ScalarConverter::flVal = 0;
+ScalarConverter::Pseudos ScalarConverter::ps = ScalarConverter::NINFF;
 
 bool  ScalarConverter::intCheck(const std::string &str){
 	std::istringstream conv(str);
@@ -72,6 +73,19 @@ bool  ScalarConverter::floatCheck(const std::string &str){
 	return (true);
 }
 
+bool ScalarConverter::pseudoCheck(const std::string &literal){
+	std::string pseudos[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
+	for (int i = 0; i <= 5; i++){
+		if (literal == pseudos[i]){
+			ps = static_cast<Pseudos>(i);
+			return (true);
+		}
+	}
+	return (false);
+}
+
+
+
 int ScalarConverter::figureType(const std::string &literal){
 	if (intCheck(literal))
 		return INT;
@@ -81,13 +95,15 @@ int ScalarConverter::figureType(const std::string &literal){
 		return DOUBLE;
 	else if (floatCheck(literal))
 		return FLOAT;
+	else if (pseudoCheck(literal))
+		return PSEUDO;
 	else
 		throw (ScalarConverter::invalidInput());
 }
 
 void	ScalarConverter::printChar(double val){
 	if(val >= 32 && val <= 126)
-		std::cout << "char: " << static_cast<char>(val) << std::endl;
+		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
 	else if ((val < 32 && val >= 0) || val == 127)
 		std::cout << "char: " << "Non Displayable" << std::endl;
 	else
@@ -100,26 +116,35 @@ void	ScalarConverter::printDouble(double val){
 	
 	strstr << val;
 	result = strstr.str();
-	if (result.find('e') == std::string::npos)
-		std::cout << "Double: " << static_cast<double>(intVal) << ".0"<< std::endl;
+	if (val == -INFINITY || val == +INFINITY || result == "nan"){
+		std::cout << "Double: " << val << std::endl;
+		return ;
+	}
+	else if (result.find('e') == std::string::npos && result.find('.') == std::string::npos)
+		std::cout << "Double: " << val << ".0"<< std::endl;
 	else	
-		std::cout << "Double: " << static_cast<double>(intVal) << std::endl;
-
+		std::cout << "Double: " <<val << std::endl;
 }
 
-void	ScalarConverter::printFloat(double val, const std::string &type){
+void	ScalarConverter::printFloat(double val){
 	std::stringstream strstr;
 	std::string 	  result;
-	
-	
-	if (val < std::numeric_limits<float>::min() || val > std::numeric_limits<float>::max()){
+
+	strstr << val;
+	result = strstr.str();
+	if (flVal == -INFINITY || flVal == +INFINITY || result == "nan"){
+			std::cout << "Float: " << flVal << "f" << std::endl;
+			return ;
+	}
+	else if (val < -std::numeric_limits<float>::max()
+	 || val > std::numeric_limits<float>::max()){
 		std::cout << "Float: Impossible" << std::endl; 
 		return ;
 	}
-	strstr << val;
-	result = strstr.str();
-	if (result.find('e') == std::string::npos)
+	if (result.find('e') == std::string::npos && result.find('.') == std::string::npos)
 		std::cout << "Float: " << static_cast<float>(val) << ".0f" << std::endl;
+	else if (result.find('.') == std::string::npos)
+		std::cout << "Float: " << static_cast<float>(val) << "f" << std::endl;
 	else
 		std::cout << "Float: " << static_cast<float>(val) << std::endl;
 }
@@ -135,7 +160,7 @@ void	ScalarConverter::caseInt(void){
 	printChar(static_cast<double>(intVal));
 	std::cout << "Int: " << intVal << std::endl;
 	printDouble(static_cast<double>(intVal));
-	printFloat(static_cast<float>(intVal), "int");
+	printFloat(static_cast<float>(intVal));
 }
 
 void	 ScalarConverter::caseChar(void){
@@ -149,14 +174,43 @@ void	 ScalarConverter::caseDouble(void){
 	printChar(doubVal);
 	printInt(doubVal);
 	printDouble(doubVal);
-	printFloat(doubVal, "double");
+	printFloat(doubVal);
 }
 
-void	 ScalarConverter::caseFloat(void){
+void	ScalarConverter::caseFloat(void){
 	printChar(static_cast<double>(flVal));
 	printInt(static_cast<double>(flVal));
 	printDouble(static_cast<double>(flVal));
-	printFloat(static_cast<double>(flVal), "float");
+	printFloat(static_cast<double>(flVal));
+}
+
+void	ScalarConverter::casePseudo(void){
+	switch(ps){
+		case NINFF:
+			flVal = -INFINITY;
+			caseFloat();
+			break ;
+		case PINFF:
+			flVal = +INFINITY;
+			caseFloat();
+			break ;
+		case NANF_:
+			flVal = NAN;
+			caseFloat();
+			break ;
+		case NINF:
+			doubVal = -INFINITY;
+			caseDouble();
+			break ;
+		case PINF:
+			doubVal = +INFINITY;
+			caseDouble();
+			break ;
+		case NAN_:
+			doubVal = NAN;
+			caseDouble();
+			break ;
+	}
 }
 
 void	ScalarConverter::convert(const std::string &literal){
@@ -173,6 +227,9 @@ void	ScalarConverter::convert(const std::string &literal){
 				break ;
 			case FLOAT:
 				caseFloat();
+				break ;
+			case PSEUDO:
+				casePseudo();
 				break ;
 		}
 	}
