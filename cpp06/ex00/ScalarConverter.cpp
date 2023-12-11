@@ -141,7 +141,7 @@ void	ScalarConverter::printFloat(double val){
 	strstr << val;
 	result = strstr.str();
 	if (flVal == -INFINITY || flVal == +INFINITY || result == "nan"){
-			std::cout << "Float: " << flVal << "f" << std::endl;
+			std::cout << "Floaat: " << val << "f" << std::endl;
 			return ;
 	}
 	else if (val < -std::numeric_limits<float>::max()
