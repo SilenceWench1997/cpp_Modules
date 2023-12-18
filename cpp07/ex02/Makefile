@@ -6,7 +6,7 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp
+SRC		= main.cpp Array.tpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
 HEADERS = Array.hpp
