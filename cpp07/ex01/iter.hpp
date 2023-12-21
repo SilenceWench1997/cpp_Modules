@@ -7,15 +7,15 @@ void print(const T& pt){
 }
 
 template <typename T>
-void iter(T *arr, int length, void (*func)(const T&)){
-	for (int i = 0; i < length; i++){
+void iter(T *arr, size_t length, void (*func)(const T&)){
+	for (size_t i = 0; i < length; i++){
 		func(arr[i]);
 	}
 }
 
 template <typename T, typename G>
-void iter(T *arr, int length, void (*func)(const G&)){
-	for (int i = 0; i < length; i++){
+void iter(T *arr, size_t length, void (*func)(const G&)){
+	for (size_t i = 0; i < length; i++){
 		func(arr[i]);
 	}
 }
