@@ -13,8 +13,9 @@ public:
 	Array(unsigned int n);
 	Array(const Array &ref);
 	Array &operator=(const Array &ref);
-	T &operator[](int index);
-	bool operator==(const Array &fst, const Array &scd);
+	~Array();
+	T &operator[](int index) const;
+	bool operator==(const Array &ref);
 	size_t size() const;
 };
 

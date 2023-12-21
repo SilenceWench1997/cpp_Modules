@@ -20,6 +20,7 @@ Array<T>::Array(const Array& ref){
 	for (size_t i = 0; i < ref.size(); i++){
 		elemArr[i] = ref.elemArr[i];
 	}
+	arrSize = ref.size();
 }
 
 template<typename T>
@@ -34,10 +35,17 @@ Array<T> &Array<T>::operator=(const Array& ref){
 }
 
 template<typename T>
-T &Array<T>::operator[](int index){
+Array<T>::~Array(){
+	delete[] elemArr;
+	arrSize = 0;
+}
+
+template<typename T>
+T &Array<T>::operator[](int index) const{
 	if ((size_t)index > arrSize - 1){
-		throw(std::out_of_range());
+		throw(std::out_of_range("invalid index"));
 	}
+	return (elemArr[index]);
 }
 
 template<typename T>
@@ -46,7 +54,14 @@ size_t Array<T>::size() const{
 }
 
 template<typename T>
-bool Array<T>::operator==(const Array &fst, const Array &scd){
-	return ;
+bool Array<T>::operator==(const Array &ref){
+	if (arrSize == ref.size()){
+		for (size_t i = 0; i < arrSize; i++){
+			if (elemArr[i] != ref[i])
+				return (false);
+		}
+		return (true);
+	}
+	return (false);
 }
 
