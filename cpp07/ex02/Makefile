@@ -1,15 +1,15 @@
 NAME	=	ex02
 
 CC		= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++17 #-fsanitize=address -g
 RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp Array.tpp
+SRC		= main.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-HEADERS = Array.hpp
+HEADERS = Array.hpp Array.tpp
 
 all: $(NAME)
 
