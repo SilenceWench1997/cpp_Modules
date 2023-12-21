@@ -2,6 +2,7 @@
 
 template<typename T>
 Array<T>::Array(){
+	std::cout << "Array def constructor called" << std::endl;
 	elemArr = new T[0];
 	arrSize = 0;
 }
@@ -14,6 +15,7 @@ Array<T>::Array(unsigned int n){
 
 template<typename T>
 Array<T>::Array(const Array& ref){
+	std::cout << "Array copy constructor" << std::endl;
 	if (*this == ref)
 		return;
 	elemArr = new T[ref.size()];
