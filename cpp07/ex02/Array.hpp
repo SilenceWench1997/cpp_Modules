@@ -17,6 +17,7 @@ public:
 	T &operator[](int index) const;
 	bool operator==(const Array &ref);
 	size_t size() const;
+	void printMembers();
 };
 
 #endif

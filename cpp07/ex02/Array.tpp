@@ -2,7 +2,6 @@
 
 template<typename T>
 Array<T>::Array(){
-	std::cout << "Array def constructor called" << std::endl;
 	elemArr = new T[0];
 	arrSize = 0;
 }
@@ -15,7 +14,6 @@ Array<T>::Array(unsigned int n){
 
 template<typename T>
 Array<T>::Array(const Array& ref){
-	std::cout << "Array copy constructor" << std::endl;
 	if (*this == ref)
 		return;
 	elemArr = new T[ref.size()];
@@ -29,10 +27,12 @@ template<typename T>
 Array<T> &Array<T>::operator=(const Array& ref){
 	if (*this == ref)
 		return (*this);
+	delete[] elemArr;
 	elemArr = new T[ref.size()];
 	for (size_t i = 0; i < ref.size(); i++){
 		elemArr[i] = ref.elemArr[i];
 	}
+	arrSize = ref.size();
 	return (*this);
 }
 
@@ -67,3 +67,12 @@ bool Array<T>::operator==(const Array &ref){
 	return (false);
 }
 
+template<typename T>
+void Array<T>::printMembers(void){
+	for (size_t i = 0; i < size(); i++){
+		std::cout << (*this)[i];
+		if (i < size() - 1)
+			std::cout << ", ";
+	}
+	std::cout << std::endl;
+}
