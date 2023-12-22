@@ -2,13 +2,13 @@
 
 template<typename T>
 Array<T>::Array(){
-	elemArr = new T[0];
+	elemArr = new T[0]{};
 	arrSize = 0;
 }
 
 template<typename T>
 Array<T>::Array(unsigned int n){
-	elemArr = new T[n];
+	elemArr = new T[n]{};
 	arrSize = n;
 }
 

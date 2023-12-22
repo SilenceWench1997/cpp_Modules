@@ -2,7 +2,7 @@
 
 int main(){
 		std::cout << "-----Construction With No Parameter----" << std::endl;
-		Array<int> a;
+		Array<const int> a(5);
 		std::cout << "Size: " << a.size() << "\n";
 		std::cout << "---------------------------------------" << std::endl;
 
