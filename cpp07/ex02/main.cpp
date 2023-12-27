@@ -2,7 +2,7 @@
 
 int main(){
 		std::cout << "-----Construction With No Parameter----" << std::endl;
-		Array<const int> a(5);
+		Array<int> a;
 		std::cout << "Size: " << a.size() << "\n";
 		std::cout << "---------------------------------------" << std::endl;
 
@@ -35,5 +35,4 @@ int main(){
 			c.printMembers();
 		}
 		std::cout << "-----------------------------------------------------" << std::endl;
-		std::cout << "Check Leaks bruh" << std::endl;
 }
