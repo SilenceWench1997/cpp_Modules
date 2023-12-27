@@ -1,6 +1,8 @@
 #ifndef ITER_HPP
 # define ITER_HPP
 
+#include <iostream>
+
 template <typename T>
 void print(const T& pt){
 	std::cout << pt << std::endl;
