@@ -2,11 +2,10 @@
 # define EASYFIND_HPP
 
 template<typename T>
-int easyfind(T &cont, int to_find){
-	for(int i = 0; cont[i]; i++){
-		if (cont[i] == to_find)
-			return i;
-	}
+bool easyfind(T &cont, int to_find){
+	std::vector<int>::iterator it = std::find(cont.begin(), cont.end(), to_find);
+	if (it != cont.end())
+		return (true);
 	throw (std::out_of_range("Could not find."));
 }
 

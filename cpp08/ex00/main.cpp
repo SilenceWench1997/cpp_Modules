@@ -8,7 +8,7 @@ int main(){
 	vt.push_back(31);
 	vt.push_back(123);
 	try{
-		easyfind(vt, 321);
+		easyfind(vt, 123);
 	}catch(const std::out_of_range &e){
 		std::cout << e.what() << std::endl;
 	}
