@@ -31,20 +31,22 @@ void identify(Base *p){
 }
 
 void identify(Base &p){
+	Base *ref;
+
 	try {
-			dynamic_cast<A&>(p);
+			ref = &dynamic_cast<A&>(p);
 			std::cout << "identify: The reference sent to identify was of type 'A'" << std::endl;
 			return ;
-	} catch (std::exception &e) {}
+	} catch (const std::exception &e) {}
 	try {
-			dynamic_cast<B&>(p);
+			ref = &dynamic_cast<B&>(p);
 			std::cout << "identify: The reference sent to identify was of type 'B'" << std::endl;
 			return ;
-	} catch (std::exception &e) {}
+	} catch (const std::exception &e) {}
 	try {
-			dynamic_cast<C&>(p);
+			ref = &dynamic_cast<C&>(p);
 			std::cout << "identify: The reference sent to identify was of type 'C'" << std::endl;
 			return ;
-	} catch (std::exception &e) {}
+	} catch (const std::exception &e) {}
 	std::cout << "identfy: could not identify the reference" << std::endl;
 }

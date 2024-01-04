@@ -10,7 +10,4 @@ int main(void){
 	std::cout << "Before:\ntype: " << ptr->type << "\nprice: " << ptr->price << std::endl;
 	ptr = Serializer::deserialize(Serializer::serialize(ptr));
 	std::cout << "After:\ntype: " << ptr->type << "\nprice: " << ptr->price << std::endl;
-
-
-	std::cout << "DON'T FORGET TO CHANGE THE STANDARD FLAG IN MAKEFILE" << std::endl;
 }

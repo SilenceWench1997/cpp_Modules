@@ -6,9 +6,9 @@
 
 class Span{
 private:
-	std::vector<int> arr;
 	size_t size;
 	unsigned int N;
+	std::vector<int> arr;
 public:
 	Span();
 	Span(unsigned int N);

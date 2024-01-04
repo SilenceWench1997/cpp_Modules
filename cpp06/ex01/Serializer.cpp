@@ -4,7 +4,11 @@ Serializer::Serializer(){}
 
 Serializer::Serializer(const Serializer &ref){*this = ref;}
 
-Serializer &Serializer::operator=(const Serializer &ref){*this = ref; return (*this);}
+Serializer &Serializer::operator=(const Serializer &ref){
+	if (this == &ref)
+		return *this;
+	return *this;
+}
 
 Serializer::~Serializer(){}
 

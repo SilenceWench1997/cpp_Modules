@@ -10,7 +10,12 @@ ScalarConverter::ScalarConverter(){};
 
 ScalarConverter::ScalarConverter(const ScalarConverter &ref){ *this = ref;}
 
-ScalarConverter &ScalarConverter::operator=(const ScalarConverter &ref){ *this = ref; return (*this);}
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &copy)
+{
+	if (this == &copy)
+		return *this;
+	return *this;
+}
 
 ScalarConverter::~ScalarConverter(){}
 
