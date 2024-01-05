@@ -11,9 +11,8 @@ public:
 	~MutantStack();
 	MutantStack &operator=(const MutantStack &ref);
 
-	T &top();
-	bool empty();
-	size_t size();
-	void push(T elem);
-	void pop();
+	typedef typename std::stack<T>::container_type::iterator iterator;
+
+	iterator begin();
+	iterator end();
 };
