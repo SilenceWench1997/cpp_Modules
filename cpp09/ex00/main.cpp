@@ -4,9 +4,9 @@
 
 int main(int argc, char **argv){
 	switch (argc){
-		case 1: {
+		case 2: {
 			Btc btc;
-			btc.parse(argv[0]);
+			btc.parse(argv[1]);
 			return (0);
 		}
 		default:

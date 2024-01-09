@@ -9,8 +9,10 @@ private:
 	std::string line;
 	std::string date;
 	std::string value;
-
+	size_t pipePos;
 	void checkline();
+	void parseDate();
+	void parseValue();
 public:
 	void parse(std::string filename);
 };
