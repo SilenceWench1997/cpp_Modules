@@ -1,7 +1,6 @@
 #include "BitcoinExchange.hpp"
 
 void Btc::parseValue(){
-	
 }
 
 void Btc::parseDate(){
