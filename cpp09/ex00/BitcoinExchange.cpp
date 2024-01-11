@@ -1,32 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-size_t Btc::countDashes(){
-	size_t pos = 0;
-	size_t count = 0;
-	
-	while (pos != std::string::npos || count <= 2){
-		switch(count){
-				case 0:
-						year = date.substr(0, date.find('-'));
-						break ;
-				case 1:
-						month = date.substr(pos + 1, date.find('-') + 1);
-						break ;
-				case 2:
-						day = date.substr(pos + 1, date.size() - 1);
-						break ;
-		}
-		pos = date.find('-', pos + 1);
-		count++;
-		std::cout << "Count:" << count << "\nPos:" << pos << "\n";
-		std::cout << "Year:"  << year << "\n";
-		std::cout << "Month:"  << month << "\n";
-		std::cout << "Day:"  << day << "\n";
-		std::cout <<  "\n";
-	}
-	return (count);
-}
-
 void Btc::parseValue(){
 	std::istringstream conv(value);
 	int valI;
@@ -58,8 +31,10 @@ void Btc::splitData(){
 		switch (count){
 			case 0:
 			year = date.substr(0, dashPos);
+			break ;
 			case 1:
 			month = date.substr(dashOld + 1, dashPos - (dashOld + 1));
+			break ;
 			case 2:
 			day = date.substr(dashOld + 1, date.size() - 1);
 		}
@@ -76,60 +51,60 @@ bool Btc::checkMonthDay(){
 		case 1:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 2: //february
 			switch (yearNum % 4){
 			case 0:
 			if (dayNum >= 1 && dayNum <= 29)
 				return (true);
-				break ;
+			break ;
 
 			default:
 			if (dayNum >= 1 && dayNum <= 28)
 				return (true);
-				break ;
+			break ;
 			}
 			break ;
 		case 3:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 4:
 		if (dayNum >= 1 && dayNum <= 30)
 			return (true);
-			break ;
+		break ;
 		case 5:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 6:
 		if (dayNum >= 1 && dayNum <= 30)
 			return (true);
-			break ;
+		break ;
 		case 7:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 8:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 9:
 		if (dayNum >= 1 && dayNum <= 30)
 			return (true);
-			break ;
+		break ;
 		case 10:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 		case 11:
 		if (dayNum >= 1 && dayNum <= 30)
 			return (true);
-			break ;
+		break ;
 		case 12:
 		if (dayNum >= 1 && dayNum <= 31)
 			return (true);
-			break ;
+		break ;
 	}
 	return (false);
 }
@@ -159,7 +134,7 @@ void Btc::checkline(){
 		}
 		return ;
 	}
-	throw (std::invalid_argument("No pipe found"));
+	throw (std::invalid_argument("No | found"));
 }
 
 void Btc::parse(std::string filename){

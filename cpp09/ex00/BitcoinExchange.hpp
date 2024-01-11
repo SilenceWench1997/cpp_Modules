@@ -7,9 +7,6 @@
 
 class Btc{
 private:
-	std::string year;
-	std::string month;
-	std::string day;
 	std::string line;
 	std::string date;
 	std::string value;
