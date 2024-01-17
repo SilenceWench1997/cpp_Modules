@@ -1,4 +1,4 @@
-NAME	=	btc	
+NAME	=	RPN	
 
 CC		= c++
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++11#-fsanitize=address -g
@@ -6,10 +6,10 @@ RM		= rm -rf
 
 OBJ_DIR	= obj
 SRC_DIR = ./
-SRC		= main.cpp BitcoinExchange.cpp
+SRC		= main.cpp RPN.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 
-HEADERS = BitcoinExchange.hpp
+HEADERS = RPN.hpp
 
 all: $(NAME)
 
