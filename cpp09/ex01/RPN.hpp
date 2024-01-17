@@ -2,25 +2,17 @@
 #define RPN_HPP
 
 #include <iostream>
-
-enum e_ops{
-	ADD,
-	SUB,
-	MULT,
-	DIV,
-}
-
-class operation{
-	int firstNum;
-	int	secondNum;
-	e_ops op;
-};
+#include <stack>
+#include <cctype>
 
 class Rpn{
 private:
-	std::list exp;
+	std::stack<int> st;
+	void checkSynt(const std::string &expr);
+	bool extraChars(char c);
+	void doAction(char op);
 public:
-		void parser(std::string &expr);
+	void parser(const std::string &expr);
 };
 
 #endif
