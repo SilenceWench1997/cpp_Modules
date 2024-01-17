@@ -195,8 +195,6 @@ void Btc::parse(std::string filename){
 			} catch (const std::invalid_argument &e){
 				std::cout << e.what() << std::endl;
 				continue ;
-			} catch (const std::exception &e){
-				std::cout << e.what();
 			}
 		}
 		return ;
@@ -215,7 +213,7 @@ void Btc::storeData(){
 
 	db.open("data.csv");
 	if (!db.is_open())
-		throw (std::exception());//do something
+		throw (std::invalid_argument("Could not open data file"));
 	while (getline(db, line)){
 		getRate();
 		data[line.substr(0, line.find(","))] = rate;
