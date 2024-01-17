@@ -3,44 +3,48 @@
 void Btc::throwError(Errors cause, std::string str){
 	switch (cause){
 		case NEGVAL:
-			str = "Not a positive number =>" + str;
-		case HUGEVAL:
+			str = "Not a positive number => " + str;
+			break ;
+		case HUGEVAL: 
 			str = "Value too big =>" + str;
+			break ;
 		case INVVAL:
-			str = "Invalid value =>" + str;
+			str = "Invalid value => " + str;
+			break ;
 		case FORMAT:
-			str = "Invalid date format =>" + str;
+			str = "Invalid date format => " + str;
+			break ;
 		case MD:
-			str = "Bad month or day =>" + str;
+			str = "Bad month or day => " + str;
+			break ;
 		case YEAR:
-			str = "Invalid year =>" + str;
+			str = "Invalid year => " + str;
+			break ;
 		case MONTH:
-			str = "Invalid month =>" + str;
+			str = "Invalid month => " + str;
+			break ;
 		case DAY:
-			str = "Invalid day =>" + str;
+			str = "Invalid day => " + str;
+			break ;
 		case INVLINE:
-			str = "Invalid line =>" + str;
+			str = "Invalid line => " + str;
+			break ;
+		case RATE:
+			str = "Invalid Rate => " + str;
+			break ;
 	}
 	throw std::invalid_argument(str);
 }
 
 void Btc::parseValue(){
 	std::istringstream conv(value);
-	int valI;
-	float valF;
-	if (conv >> valI){
-		if (valI >= 0 && valI <= 1000)
+
+	if (conv >> val){
+		if (val >= 0 && val <= 1000)
 			return ;
-		else if (valI < 0)
+		else if (val < 0)
 			throwError(NEGVAL, value);
-		else if (valI > 1000)
-			throwError(HUGEVAL, value);
-	}else if (conv >> valF){
-		if (valF >= 0 && valF <= 1000)
-			return ;
-		else if (valF < 0)
-			throwError(NEGVAL, value);
-		else if (valF > 1000)
+		else if (val > 1000)
 			throwError(HUGEVAL, value);
 	}
 	throwError(INVVAL, value);
@@ -158,7 +162,7 @@ void Btc::parseDate(){
 void Btc::checkline(){
 	pipePos = line.find('|');
 	if (pipePos != std::string::npos){
-		date = line.substr(0, pipePos);
+		date = line.substr(0, (pipePos - 1));
 		value = line.substr(pipePos + 1, line.size() - pipePos);
 		try{
 			parseDate();
@@ -190,6 +194,7 @@ void Btc::parse(std::string filename){
 				displayBtc();
 			} catch (const std::invalid_argument &e){
 				std::cout << e.what() << std::endl;
+				continue ;
 			} catch (const std::exception &e){
 				std::cout << e.what();
 			}
@@ -199,13 +204,35 @@ void Btc::parse(std::string filename){
 	std::cout << "File Does Not Exist" << std::endl;
 }
 
-void Btc::displayBtc(){
+void Btc::getRate(){
+	std::istringstream conv(line.substr(line.find(',') + 1, line.size() - (line.find(',') + 1)));
+	
+	conv >> rate;
+}
+
+void Btc::storeData(){
 	std::ifstream db;
 
 	db.open("data.csv");
-	if (db.is_open())
-		throw (std::exception());//do something about it idk
+	if (!db.is_open())
+		throw (std::exception());//do something
 	while (getline(db, line)){
-		if (date = line.subs)
+		getRate();
+		data[line.substr(0, line.find(","))] = rate;
+	}
+}
+
+void Btc::displayBtc(){
+	storeData();
+	std::map<std::string, float>::iterator it = data.begin();
+	if (data.find(date) != data.end()){
+		std::cout << date << " => " << val << " = " << val * data[date] << std::endl;
+	} else {
+		for (it = data.begin(); it != data.end(); ++it){
+			if (it->first > date){
+				std::cout << date << " => " << val << " = " << val * it->second << std::endl;
+				break ;
+			}
+		}
 	}
 }

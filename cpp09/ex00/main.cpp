@@ -7,7 +7,6 @@ int main(int argc, char **argv){
 		case 2: {
 			Btc btc;
 			btc.parse(argv[1]);
-			btc.displayBtc();
 			return (0);
 		}
 		default:

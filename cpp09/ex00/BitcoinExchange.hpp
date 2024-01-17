@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 class Btc{
 private:
@@ -17,6 +18,7 @@ private:
 		MONTH,
 		DAY,
 		INVLINE,
+		RATE,
 	};
 	std::string line;
 	std::string date;
@@ -29,12 +31,17 @@ private:
 	int monthNum;
 	int dayNum;
 	int yearNum;
+	float val;
+	float rate;
 	void splitData();
 	void checkline();
 	void parseDate();
 	void parseValue();
 	void throwError(Errors cause, std::string str);
 	void checkMonthDay();
+	void getRate();
+	void storeData();
+	std::map<std::string, float> data;
 public:
 	void parse(std::string filename);
 	void displayBtc();
