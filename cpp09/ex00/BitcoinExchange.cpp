@@ -1,5 +1,29 @@
 #include "BitcoinExchange.hpp"
 
+void Btc::throwError(Errors cause, std::string str){
+	switch (cause){
+		case NEGVAL:
+			str = "Not a positive number =>" + str;
+		case HUGEVAL:
+			str = "Value too big =>" + str;
+		case INVVAL:
+			str = "Invalid value =>" + str;
+		case FORMAT:
+			str = "Invalid date format =>" + str;
+		case MD:
+			str = "Bad month or day =>" + str;
+		case YEAR:
+			str = "Invalid year =>" + str;
+		case MONTH:
+			str = "Invalid month =>" + str;
+		case DAY:
+			str = "Invalid day =>" + str;
+		case INVLINE:
+			str = "Invalid line =>" + str;
+	}
+	throw std::invalid_argument(str);
+}
+
 void Btc::parseValue(){
 	std::istringstream conv(value);
 	int valI;
@@ -7,15 +31,19 @@ void Btc::parseValue(){
 	if (conv >> valI){
 		if (valI >= 0 && valI <= 1000)
 			return ;
-		else
-			throw (std::invalid_argument("Invalid Value"));
-	}	else if (conv >> valF){
+		else if (valI < 0)
+			throwError(NEGVAL, value);
+		else if (valI > 1000)
+			throwError(HUGEVAL, value);
+	}else if (conv >> valF){
 		if (valF >= 0 && valF <= 1000)
 			return ;
-		else
-			throw (std::invalid_argument("Invalid Value"));
+		else if (valF < 0)
+			throwError(NEGVAL, value);
+		else if (valF > 1000)
+			throwError(HUGEVAL, value);
 	}
-	throw (std::invalid_argument("Invalid Value"));
+	throwError(INVVAL, value);
 }
 
 void Btc::splitData(){
@@ -24,101 +52,107 @@ void Btc::splitData(){
 	size_t count = 0;
 
 	if (date.find('-') == std::string::npos)
-		throw (std::invalid_argument("Invalid Date"));
+		throwError(FORMAT, date);
 	while (true){
 		dashOld = dashPos;
 		dashPos = date.find('-', dashPos + (dashPos != 0));
 		switch (count){
 			case 0:
 			year = date.substr(0, dashPos);
-			break ;
+			break;
 			case 1:
 			month = date.substr(dashOld + 1, dashPos - (dashOld + 1));
-			break ;
+			break;
 			case 2:
-			day = date.substr(dashOld + 1, date.size() - 1);
+			day = date.substr(dashOld + 1, date.size() - 1 - (dashOld + (date[date.size() - 1] == ' ')));
 		}
 		if (count == 2)
 			break ;
 		count++;
 	}
 	if (count != 2 || day.find('-') != std::string::npos)
-		throw (std::invalid_argument("Invalid Date"));
+		throwError(FORMAT, date);
 }
 
-bool Btc::checkMonthDay(){
+void Btc::checkMonthDay(){
 	switch (monthNum){
 		case 1:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 2: //february
 			switch (yearNum % 4){
 			case 0:
 			if (dayNum >= 1 && dayNum <= 29)
-				return (true);
-			break ;
+				return;
+				break ;
 
 			default:
 			if (dayNum >= 1 && dayNum <= 28)
-				return (true);
-			break ;
+				return;
+				break ;
 			}
 			break ;
 		case 3:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 4:
 		if (dayNum >= 1 && dayNum <= 30)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 5:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 6:
 		if (dayNum >= 1 && dayNum <= 30)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 7:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 8:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 9:
 		if (dayNum >= 1 && dayNum <= 30)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 10:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 11:
 		if (dayNum >= 1 && dayNum <= 30)
-			return (true);
-		break ;
+			return;
+			break ;
 		case 12:
 		if (dayNum >= 1 && dayNum <= 31)
-			return (true);
-		break ;
+			return;
+			break ;
 	}
-	return (false);
+	throwError(MD, date);
 }
 
 void Btc::parseDate(){
- 	splitData();
+	splitData();
 	std::istringstream convY(year);
 	std::istringstream convM(month);
 	std::istringstream convD(day);
 
-	if (year.size() != 4 || !(convY >> yearNum) ||
-	month.size() != 2 || !(convM >> monthNum) ||
-	day.size() != 2 || !(convD >> dayNum) || !checkMonthDay())
-		throw (std::invalid_argument("Invalid Date"));
+	if (year.size() != 4 || !(convY >> yearNum)){
+		throwError(YEAR, year);
+	}
+	if (month.size() != 2 || !(convM >> monthNum)){
+		throwError(MONTH, month);
+	}
+	if (day.size() != 2 || !(convD >> dayNum)){
+		throwError(DAY, day);
+	}
+	checkMonthDay();
 }
 
 void Btc::checkline(){
@@ -134,21 +168,44 @@ void Btc::checkline(){
 		}
 		return ;
 	}
-	throw (std::invalid_argument("No | found"));
+	throwError(INVLINE, line);
 }
 
 void Btc::parse(std::string filename){
-	std::ifstream db;
+	std::ifstream inp;
+	bool firstLine = true;
 
-	db.open(filename);
-	if (db.is_open()){
-		while (getline(db, line)){
+	inp.open(filename);
+	if (inp.is_open()){
+		while (getline(inp, line)){
+			if (firstLine && line != "date | value"){
+				std::cout << "Invalid Input File" << std::endl;
+				return ;
+			} else if (firstLine){
+				firstLine = false;
+				continue ;
+			}
 			try{
 				checkline();
+				displayBtc();
 			} catch (const std::invalid_argument &e){
 				std::cout << e.what() << std::endl;
+			} catch (const std::exception &e){
+				std::cout << e.what();
 			}
 		}
+		return ;
 	}
-	
+	std::cout << "File Does Not Exist" << std::endl;
+}
+
+void Btc::displayBtc(){
+	std::ifstream db;
+
+	db.open("data.csv");
+	if (db.is_open())
+		throw (std::exception());//do something about it idk
+	while (getline(db, line)){
+		if (date = line.subs)
+	}
 }
