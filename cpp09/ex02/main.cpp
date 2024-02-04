@@ -14,7 +14,9 @@ int main(int argc, char **argv){
 						return (0);
 					}
 			}
+			conv.setStart();
 			conv.sortV(conv.getArrV());
+			conv.printResults(conv.getArrV(), conv.sortV(conv.getArrV()));
 	}
 	return (0);
 }

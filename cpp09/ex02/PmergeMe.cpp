@@ -100,12 +100,8 @@ std::vector<int> PM::sortV(const std::vector<int> &arrVt){
 	for (size_t i = 0; i < smallerElems.size(); i++){
 		sortedArr.insert(binarySearch(sortedArr, smallerElems[i], 0, sortedArr.size() - 1), smallerElems[i]);
 	}
-	for (size_t i = 0; i < sortedArr.size(); i++){
-		for (size_t j = i + 1; j < sortedArr.size(); j++){
-			if (sortedArr[i] > sortedArr[j])
-				std::cout << "omaygot" << std::endl;
-		}
-	}
+	if (sortedArr[0] == -1)
+		sortedArr.pop_back();
 	return (sortedArr);
 }
 
@@ -120,4 +116,19 @@ void PM::parse(std::string input){
 	if (!(conv >> num))
 		throw (std::invalid_argument("Enter a number between 0 and 2147483647"));
 	arrV.push_back(num);
+}
+
+void PM::setStart(){
+	start = clock();
+}
+
+void PM::printResults(std::vector<int> &before, std::vector<int> after){
+	double duration = (std::clock() - start)/(double)CLOCKS_PER_SEC;
+	std::cout << "Before: ";
+	for (size_t i = 0; i < before.size(); i++)
+		std::cout << before[i] << " ";
+	std::cout << "\nAfter: ";
+	for (size_t i = 0; i < after.size(); i++)
+		std::cout << after[i] << " ";
+	std::cout << "\nTime to process a range of " << before.size() << " elements with std::vector : " << std::fixed << duration << " seconds" << std::endl;
 }
