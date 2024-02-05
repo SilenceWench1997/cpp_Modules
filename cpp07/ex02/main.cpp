@@ -2,10 +2,10 @@
 
 int main(){
 		std::cout << "-----Construction With No Parameter----" << std::endl;
-		Array<int> a;
+		Array<const int> a(5);
 		std::cout << "Size: " << a.size() << "\n";
 		std::cout << "---------------------------------------" << std::endl;
-
+		Array<const int> b(a);
 		std::cout << "\n-----Construction With an Unsigned Int as a Parameter----\n";
 		Array<float> c(12);
 		std::cout << "Size: " << c.size() << "\n";
