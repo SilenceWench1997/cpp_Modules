@@ -1,10 +1,10 @@
-#include "PmergeMe.hpp"
+#include "PmergeMeV.hpp"
 
-std::vector<int> &PM::getArrV(){
+std::vector<int> &PMV::getArrV(){
 	return (arrV);
 }
 
-std::vector<std::pair<int, int> > PM::createPairs(const std::vector<int> &arrVt){
+std::vector<std::pair<int, int> > PMV::createPairs(const std::vector<int> &arrVt){
 	std::vector<std::pair<int, int> > pair;
 	std::vector<int> largeElems;
 	
@@ -17,7 +17,7 @@ std::vector<std::pair<int, int> > PM::createPairs(const std::vector<int> &arrVt)
 	return (pair);
 }
 
-void PM::merge(std::vector<std::pair<int, int> > &elems, size_t start, size_t middle, size_t end){
+void PMV::merge(std::vector<std::pair<int, int> > &elems, size_t start, size_t middle, size_t end){
 	size_t l = middle - start + 1;
 	size_t r = end - middle;
 
@@ -41,7 +41,7 @@ void PM::merge(std::vector<std::pair<int, int> > &elems, size_t start, size_t mi
 		elems[k++].first = right[j++];
 }
 
-void PM::mergeSort(std::vector<std::pair<int, int> > &pairs, size_t start, size_t end){
+void PMV::mergeSort(std::vector<std::pair<int, int> > &pairs, size_t start, size_t end){
 	if (start < end){
 		size_t middle = start + (end - start) / 2;
 		mergeSort(pairs, start, middle);
@@ -51,7 +51,7 @@ void PM::mergeSort(std::vector<std::pair<int, int> > &pairs, size_t start, size_
 	}
 }
 
-void PM::sortPairs(std::vector<std::pair<int, int> > &pairs){
+void PMV::sortPairs(std::vector<std::pair<int, int> > &pairs){
 	int temp;
 	for (size_t i = 0; i < pairs.size(); i++)
 		if (pairs[i].first < pairs[i].second){
@@ -61,14 +61,14 @@ void PM::sortPairs(std::vector<std::pair<int, int> > &pairs){
 		}
 }
 
-std::vector<int>::iterator PM::iterate(size_t pos, std::vector<int> &elems){
+std::vector<int>::iterator PMV::iterate(size_t pos, std::vector<int> &elems){
 	std::vector<int>::iterator it = elems.begin();
 	for(size_t i = 0; i < pos; i++)
 		it++;
 	return (it);
 }
 
-std::vector<int>::iterator PM::binarySearch(std::vector<int> &elems, int num, size_t low, size_t high){
+std::vector<int>::iterator PMV::binarySearch(std::vector<int> &elems, int num, size_t low, size_t high){
 	size_t mid = low + (high - low)/2;
 
 	if (high == low)
@@ -83,7 +83,7 @@ std::vector<int>::iterator PM::binarySearch(std::vector<int> &elems, int num, si
 	return (binarySearch(elems, num, low, high));
 }
 
-std::vector<int> PM::sortV(const std::vector<int> &arrVt){
+std::vector<int> PMV::sortV(const std::vector<int> &arrVt){
 	std::vector<std::pair<int, int> > pairs;
 	std::vector<int> sortedArr;
 	std::vector<int> smallerElems;
@@ -92,10 +92,11 @@ std::vector<int> PM::sortV(const std::vector<int> &arrVt){
 		return (arrVt);
 	pairs = createPairs(arrVt);
 	sortPairs(pairs);
-	mergeSort(pairs, 0, pairs.size() - 1); //sorting the bigger elements
+	mergeSort(pairs, 0, pairs.size() - 1);
+	sortedArr.push_back(pairs[0].second);
 	for (size_t i = 0; i < pairs.size(); i++)
 		sortedArr.push_back(pairs[i].first);
-	for (size_t i = 0; i < pairs.size(); i++)
+	for (size_t i = 1; i < pairs.size(); i++)
 		smallerElems.push_back(pairs[i].second);
 	for (size_t i = 0; i < smallerElems.size(); i++){
 		sortedArr.insert(binarySearch(sortedArr, smallerElems[i], 0, sortedArr.size() - 1), smallerElems[i]);
@@ -105,24 +106,11 @@ std::vector<int> PM::sortV(const std::vector<int> &arrVt){
 	return (sortedArr);
 }
 
-void PM::parse(std::string input){
-	std::istringstream conv(input);
-	int num;
-
-	for (size_t i = 0; i < input.size(); i++){
-		if (!isdigit(input[i]))
-			throw (std::invalid_argument("Non Numeric Character"));
-	}
-	if (!(conv >> num))
-		throw (std::invalid_argument("Enter a number between 0 and 2147483647"));
-	arrV.push_back(num);
-}
-
-void PM::setStart(){
+void PMV::setStart(){
 	start = clock();
 }
 
-void PM::printResults(std::vector<int> &before, std::vector<int> after){
+void PMV::printResults(std::vector<int> &before, std::vector<int> after){
 	double duration = (std::clock() - start)/(double)CLOCKS_PER_SEC;
 	std::cout << "Before: ";
 	for (size_t i = 0; i < before.size(); i++)

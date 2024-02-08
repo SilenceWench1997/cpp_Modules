@@ -1,5 +1,5 @@
-#ifndef PMERGEME_HPP
-#define PMERGEME_HPP
+#ifndef PMV_HPP
+#define PMV_HPP
 
 #include <iostream>
 #include <vector>
@@ -8,14 +8,13 @@
 #include <ctime>
 #include <iomanip>
 
-class PM{
+class PMV{
 private:
 	std::vector<int> arrV;
 	clock_t start;
 public:
 	void setStart();
 	void printResults();
-	void parse(std::string input);
 	std::vector<int> &getArrV();
 	std::vector<std::pair<int, int> > createPairs(const std::vector<int> &arrVt);
 	std::vector<int> sortV(const std::vector<int> &arrVt);
