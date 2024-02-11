@@ -4,12 +4,22 @@ std::list<int> &PML::getArr(){
 	return (arrL);
 }
 
-std::list<std::pair<int, int> > createPairs(std::list<int> &arrL){
+void	PML::sortPairs(std::list<std::pair<int, int> > &pairs){
+	int temp;
+
+	for (size_t i = 0; i < pairs.size(); i++)
+	if (pairs[i].first < pairs[i].second){
+		temp = pairs[i].first;
+		pairs[i].first = pairs[i].second;
+		pairs[i].second = temp;
+	}
+}
+
+std::list<std::pair<int, int> > PML::createPairs(std::list<int> &arrL){
 	std::list<std::pair<int, int> > pair;
 	std::list<int> largeElems;
 	
 	for (std::list<int>::iterator it = arrL.begin(); it != arrL.end(); it++){
-		it++;
 		if (it + 1 < arrL.size())
 			pair.push_back(std::pair<int, int>(arrL[i], arrL[i + 1]));
 		else
@@ -26,7 +36,7 @@ std::list<int> &PML::sort(std::list<int> arrL){
 	if (arrL.size() == 1)
 		return (arrL);
 	pairs = createPairs(arrL);
-	// sortPairs(pairs);
+	sortPairs(pairs);
 	// mergeSort(pairs, 0, pairs.size() - 1); //sorting the bigger elements
 	// for (size_t i = 0; i < pairs.size(); i++)
 	// 	sortedArr.push_back(pairs[i].first);
