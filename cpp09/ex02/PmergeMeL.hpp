@@ -2,6 +2,7 @@
 #define PML_HPP
 
 #include <list>
+#include <iostream>
 
 class PML {
 private:
@@ -9,8 +10,8 @@ private:
 public:
 	PML();
 	~PML();
-	std::list<int> &getArrL();
-	std::list<int> &sortL(std::list<int> arrL);
+	std::list<int> &getArr();
+	std::list<int> &sort(std::list<int> arrL);
 };
 
 #endif

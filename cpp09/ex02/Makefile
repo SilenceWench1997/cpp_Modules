@@ -2,7 +2,7 @@ NAME	=	PmergeMe
 NAMEC	=	Checker
 
 CC		= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98#-fsanitize=address -g
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g #-fsanitize=address
 RM		= rm -rf
 
 OBJ_DIR	= obj
@@ -11,12 +11,12 @@ OBJ_DIR_C = objc
 SRC_DIR = ./
 SRC_DIR_C = ./
 
-SRC		= main.cpp PmergeMe.cpp
+SRC		= main.cpp PmergeMeV.cpp PmergeMeL.cpp
 SRC_C		= checker.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 OBJ_C	= $(patsubst %.cpp, $(OBJ_DIR_C)/%.o, $(SRC_C))
 
-HEADERS = PmergeMe.hpp
+HEADERS = PmergeMeV.hpp PmergeMeL.hpp
 
 all: $(NAME)
 

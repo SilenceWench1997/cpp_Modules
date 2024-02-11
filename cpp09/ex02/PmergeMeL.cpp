@@ -1,14 +1,24 @@
 #include <PmergeMeL.hpp>
 
-std::list<int> &PML::getArrL(){
+std::list<int> &PML::getArr(){
 	return (arrL);
 }
 
 std::list<std::pair<int, int> > createPairs(std::list<int> &arrL){
+	std::list<std::pair<int, int> > pair;
+	std::list<int> largeElems;
 	
+	for (std::list<int>::iterator it = arrL.begin(); it != arrL.end(); it++){
+		it++;
+		if (it + 1 < arrL.size())
+			pair.push_back(std::pair<int, int>(arrL[i], arrL[i + 1]));
+		else
+			pair.push_back(std::pair<int, int>(arrL[i], -1));
+	}
+	return (pair);
 }
 
-std::list<int> &PML::sortL(std::list<int> arrL){
+std::list<int> &PML::sort(std::list<int> arrL){
 	std::list<std::pair<int, int> > pairs;
 	std::list<int> sortedArr;
 	std::list<int> smallerElems;
