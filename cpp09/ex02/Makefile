@@ -11,12 +11,12 @@ OBJ_DIR_C = objc
 SRC_DIR = ./
 SRC_DIR_C = ./
 
-SRC		= main.cpp PmergeMeV.cpp PmergeMeL.cpp
+SRC		= main.cpp PmergeMeV.cpp PmergeMeD.cpp
 SRC_C		= checker.cpp
 OBJ		= $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(SRC))
 OBJ_C	= $(patsubst %.cpp, $(OBJ_DIR_C)/%.o, $(SRC_C))
 
-HEADERS = PmergeMeV.hpp PmergeMeL.hpp
+HEADERS = PmergeMeV.hpp PmergeMeD.hpp
 
 all: $(NAME)
 

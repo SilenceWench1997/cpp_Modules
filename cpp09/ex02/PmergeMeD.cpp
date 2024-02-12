@@ -1,16 +1,16 @@
-#include "PmergeMeV.hpp"
+#include "PmergeMeD.hpp"
 
-std::vector<int> &PMV::getArr(){
+std::deque<int> &PMD::getArr(){
 	return (arrV);
 }
 
-double &PMV::getDuration(){
+double &PMD::getDuration(){
 	return (duration);
 }
 
-std::vector<std::pair<int, int> > PMV::createPairs(const std::vector<int> &arrVt){
-	std::vector<std::pair<int, int> > pair;
-	std::vector<int> largeElems;
+std::deque<std::pair<int, int> > PMD::createPairs(const std::deque<int> &arrVt){
+	std::deque<std::pair<int, int> > pair;
+	std::deque<int> largeElems;
 	
 	for (size_t i = 0; i < arrVt.size(); i += 2){
 		if (i + 1 < arrVt.size())
@@ -21,11 +21,11 @@ std::vector<std::pair<int, int> > PMV::createPairs(const std::vector<int> &arrVt
 	return (pair);
 }
 
-void PMV::merge(std::vector<std::pair<int, int> > &elems, size_t start, size_t middle, size_t end){
+void PMD::merge(std::deque<std::pair<int, int> > &elems, size_t start, size_t middle, size_t end){
 	size_t l = middle - start + 1;
 	size_t r = end - middle;
 
-	std::vector<std::pair<int, int> > left, right;
+	std::deque<std::pair<int, int> > left, right;
 	for(size_t i = 0; i < l; i++)
 		left.push_back(elems[start + i]);
 	for(size_t i = 0; i < r; i++)
@@ -45,7 +45,7 @@ void PMV::merge(std::vector<std::pair<int, int> > &elems, size_t start, size_t m
 		elems[k++] = right[j++];
 }
 
-void PMV::mergeSort(std::vector<std::pair<int, int> > &pairs, size_t start, size_t end){
+void PMD::mergeSort(std::deque<std::pair<int, int> > &pairs, size_t start, size_t end){
 	if (start < end){
 		size_t middle = start + (end - start) / 2;
 		mergeSort(pairs, start, middle);
@@ -55,7 +55,7 @@ void PMV::mergeSort(std::vector<std::pair<int, int> > &pairs, size_t start, size
 	}
 }
 
-void PMV::sortPairs(std::vector<std::pair<int, int> > &pairs){
+void PMD::sortPairs(std::deque<std::pair<int, int> > &pairs){
 	int temp;
 	for (size_t i = 0; i < pairs.size(); i++)
 		if (pairs[i].first < pairs[i].second){
@@ -65,14 +65,14 @@ void PMV::sortPairs(std::vector<std::pair<int, int> > &pairs){
 		}
 }
 
-std::vector<int>::iterator PMV::iterate(size_t pos, std::vector<int> &elems){
-	std::vector<int>::iterator it = elems.begin();
+std::deque<int>::iterator PMD::iterate(size_t pos, std::deque<int> &elems){
+	std::deque<int>::iterator it = elems.begin();
 	for(size_t i = 0; i < pos; i++)
 		it++;
 	return (it);
 }
 
-std::vector<int>::iterator PMV::binarySearch(std::vector<int> &elems, int num, size_t low, size_t high){
+std::deque<int>::iterator PMD::binarySearch(std::deque<int> &elems, int num, size_t low, size_t high){
 	size_t mid = low + (high - low)/2;
 	if (high == low)
 		return (iterate(high + (num > elems[mid]), elems));
@@ -86,42 +86,42 @@ std::vector<int>::iterator PMV::binarySearch(std::vector<int> &elems, int num, s
 	return (binarySearch(elems, num, low, high));
 }
 
-void PMV::orderSmallerElems(std::vector<int> &smallerElems){
-	std::vector<std::vector<int> > vecvector;
+void PMD::orderSmallerElems(std::deque<int> &smallerElems){
+	std::deque<std::deque<int> > vecdeque;
 	size_t sizeNew = 2;
 	int posNew = 1;
 	int posOld = -1;
 	if (smallerElems.size() <= 1)
 		return ;
 	for(int i = 2; smallerElems.size() >= (size_t)posNew + 1; i++){
-		std::vector<int> vt;
+		std::deque<int> vt;
 		for (int i = posNew; i > posOld; i--)
 			vt.push_back(smallerElems[i]);
-		vecvector.push_back(vt);
+		vecdeque.push_back(vt);
 		sizeNew = pow(2, i) - sizeNew;
 		posOld = posNew;
 		posNew += sizeNew;
 	}
 	if (smallerElems.size() - (posOld + 1) > 0){
-		std::vector<int> vt;
+		std::deque<int> vt;
 		for (int i = smallerElems.size() - 1; i < posOld; i--)
 			vt.push_back(smallerElems[i]);
-		vecvector.push_back(vt);
+		vecdeque.push_back(vt);
 	}
 	size_t k = 0;
-	for (size_t i = 0; i < vecvector.size(); i++){
-		for (size_t j = 0; j < vecvector[i].size(); j++){
-			smallerElems[k] = vecvector[i][j];
+	for (size_t i = 0; i < vecdeque.size(); i++){
+		for (size_t j = 0; j < vecdeque[i].size(); j++){
+			smallerElems[k] = vecdeque[i][j];
 			k++;
 		}
 	}
 }
 
-std::vector<int> PMV::sort(const std::vector<int> &arrVt){
+std::deque<int> PMD::sort(const std::deque<int> &arrVt){
 	clock_t start = clock();
-	std::vector<std::pair<int, int> > pairs;
-	std::vector<int> sortedArr;
-	std::vector<int> smallerElems;
+	std::deque<std::pair<int, int> > pairs;
+	std::deque<int> sortedArr;
+	std::deque<int> smallerElems;
 
 	if (arrVt.size() == 1)
 		return (arrVt);

@@ -12,11 +12,11 @@
 class PMV{
 private:
 	std::vector<int> arrV;
-	clock_t start;
+	double duration;
 public:
-	void setStart();
 	void printResults();
 	std::vector<int> &getArr();
+	double &getDuration();
 	std::vector<std::pair<int, int> > createPairs(const std::vector<int> &arrVt);
 	std::vector<int> sort(const std::vector<int> &arrVt);
 	void mergeSort(std::vector<std::pair<int, int> > &elems, size_t start, size_t end);
@@ -24,7 +24,7 @@ public:
 	std::vector<int>::iterator binarySearch(std::vector<int> &elems, int num, size_t low, size_t high);
 	std::vector<int>::iterator iterate(size_t pos, std::vector<int> &elems);
 	void sortPairs(std::vector<std::pair<int, int> > &pairs);
-	void printResults(std::vector<int> &before, std::vector<int> after);
 	void orderSmallerElems(std::vector<int> &smallerElems);
 };
+
 #endif
