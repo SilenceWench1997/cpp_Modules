@@ -12,5 +12,4 @@ int main(int argc, char **argv){
 		default:
 			std::cout << "Wrong number of arguments" << std::endl;
 	}
-	std::cout << "std c++11" << std::endl;
 }

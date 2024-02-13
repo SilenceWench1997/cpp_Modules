@@ -2,7 +2,7 @@ NAME	=	PmergeMe
 NAMEC	=	Checker
 
 CC		= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g #-fsanitize=address
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 #-fsanitize=address -g
 RM		= rm -rf
 
 OBJ_DIR	= obj
