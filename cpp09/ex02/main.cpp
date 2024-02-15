@@ -8,7 +8,7 @@ void	printResults(std::vector<int> &before, std::vector<int> &after, double dura
 	std::cout << "\nAfter: ";
 	for (size_t i = 0; i < after.size(); i++)
 		std::cout << after[i] << " ";
-	std::cout << "\nTime to process a range of " << before.size() << " elements with std::vector : " << std::fixed << durationV << " seconds" << std::endl;
+	std::cout << "\nTime to process a range of " << before.size() << " elements with std::vector : " << std::fixed << durationV << " seconds";
 	std::cout << "\nTime to process a range of " << before.size() << " elements with std::deque : " << std::fixed << durationD << " seconds" << std::endl;
 }
 

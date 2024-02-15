@@ -133,6 +133,7 @@ std::vector<int> PMV::sort(const std::vector<int> &arrVt){
 		sortedArr.push_back(pairs[i].first);
 	for (size_t i = 1; i < pairs.size(); i++)
 		smallerElems.push_back(pairs[i].second);
+	orderSmallerElems(smallerElems);
 	for (size_t i = 0; i < smallerElems.size(); i++)
 		sortedArr.insert(binarySearch(sortedArr, smallerElems[i], 0, sortedArr.size() - 1), smallerElems[i]);
 	if (sortedArr[0] == -1)
