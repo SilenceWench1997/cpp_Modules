@@ -18,19 +18,25 @@ fi
 
 
 total_sum=0.0
+lowestF=9999.0
+lowestS=0
+#	`shuf -i 1-100000 -n 3000 | tr "\n" " "`
 
 for ((i = 1; i <= ttl; i++)); do
-	echo "\nLaunching PmergeMe $i"
-	output=$(./PmergeMe $(jot -r $uas 1 100000 | tr '\n' ' '))
+	echo -e "Launching PmergeMe $i"
+	output=$(./PmergeMe $(shuf -i 1-100000 -n $uas | tr '\n' ' '))
 	time_valueV=$(echo "$output" | awk '/Time to process a range of '"$uas"' elements with std::vector : / {print $(NF - 1)}')
+	if (( $(echo "$lowestF > $time_valueV" | bc -l) )); then
+		lowestF=$time_valueV
+	fi
+#	lowestF=$time_valueV
 	unit=$(echo "$output" | awk '/Time to process a range of '"$uas"' elements with std::vector/ {print $(NF)}')
 	echo "$time_valueV $unit"
 	total_sum=$(echo "$total_sum + $time_valueV" | bc)
 done
 
-middleSpeed=$(awk "BEGIN { print $total_sum / $ttl }")
+middleSpeed=$(awk "BEGIN { printf \"%.6f\", $total_sum / $ttl }")
 
-echo "Done! $middleSpeed"
-
+echo "Done! $middleSpeed , $lowestF"
 
 #add variables for containers.
