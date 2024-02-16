@@ -37,8 +37,8 @@ int main(){
 	}
 	for (size_t i = 0; i < arrVt.size() - 1; i++){
 		if (arrVt[i] > arrVt[i + 1])
-			return (error("The array was not sorted"));
+			return (error("No"));
 	}
-	std::cout << "The array was sorted" << std::endl;
+	std::cout << "Yes" << std::endl;
 	return (0);
 }

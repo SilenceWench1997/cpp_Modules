@@ -37,8 +37,9 @@ void Btc::throwError(Errors cause, std::string str){
 }
 
 void Btc::parseValue(){
+	if (value[value.size() - 1] == 'f')
+		value.pop_back();
 	std::istringstream conv(value);
-
 	if (conv >> val){
 		if (val >= 0 && val <= 1000)
 			return ;
@@ -164,12 +165,8 @@ void Btc::checkline(){
 	if (pipePos != std::string::npos){
 		date = line.substr(0, (pipePos - 1));
 		value = line.substr(pipePos + 1, line.size() - pipePos);
-		try{
-			parseDate();
-			parseValue();
-		} catch (const std::invalid_argument &e){
-			std::cout << e.what() << std::endl;
-		}
+		parseDate();
+		parseValue();
 		return ;
 	}
 	throwError(INVLINE, line);
