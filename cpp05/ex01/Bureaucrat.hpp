@@ -24,13 +24,13 @@ public:
 	void signForm(Form &ref);
 	class	gradeTooHighException : public std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Grade too high!";
 		}
 	};
 	class	gradeTooLowException :  public std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Grade too low!";
 		}
 	};

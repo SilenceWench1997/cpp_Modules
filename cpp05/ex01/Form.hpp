@@ -24,13 +24,13 @@ public:
 	void		beSigned(const Bureaucrat &ref);
 	class GradeTooHighException : std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Form: Grade too high!";
 		}
 	};
 	class GradeTooLowException : std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Form: Grade too low!";
 		}
 	};

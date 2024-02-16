@@ -25,13 +25,13 @@ public:
 	void executeForm(AForm &ref);
 	class	gradeTooHighException : public std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Bureaucrat : Grade too high!";
 		}
 	};
 	class	gradeTooLowException :  public std::exception{
 	public:
-		virtual const char *what() const noexcept{
+		virtual const char *what() const throw(){
 			return "Bureaucrat : Grade too low!";
 		}
 	};

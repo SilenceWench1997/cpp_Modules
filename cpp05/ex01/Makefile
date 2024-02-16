@@ -1,7 +1,7 @@
 NAME	=	ex01
 
 CC		= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++11  #-fsanitize=address -g
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98  #-fsanitize=address -g
 RM		= rm -rf
 
 OBJ_DIR	= obj
