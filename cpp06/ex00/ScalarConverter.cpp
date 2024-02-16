@@ -61,11 +61,17 @@ bool  ScalarConverter::doubleCheck(const std::string &str){
 	return (true);
 }
 
+std::string ScalarConverter::trimF(std::string str){
+	std::string replace;
+	if (str[str.size() - 1] == 'f')
+		str.pop_back();
+	return (str);
+}
+
 bool  ScalarConverter::floatCheck(const std::string &str){
 	bool dot = false;
 	bool f = false;
 	std::istringstream conv(str);
-	
 	if (conv >> flVal)
 		;
 	else
@@ -106,7 +112,7 @@ int ScalarConverter::figureType(const std::string &literal){
 		return CHAR;
 	else if (doubleCheck(literal))
 		return DOUBLE;
-	else if (floatCheck(literal))
+	else if (floatCheck(trimF(literal)))
 		return FLOAT;
 	else if (pseudoCheck(literal))
 		return PSEUDO;
@@ -116,11 +122,11 @@ int ScalarConverter::figureType(const std::string &literal){
 
 void	ScalarConverter::printChar(double val){
 	if(val >= 32 && val <= 126)
-		std::cout << "char: '" << static_cast<char>(val) << "'" << std::endl;
+		std::cout << "Char: '" << static_cast<char>(val) << "'" << std::endl;
 	else if ((val < 32 && val >= 0) || val == 127)
-		std::cout << "char: " << "Non Displayable" << std::endl;
+		std::cout << "Char: " << "Non Displayable" << std::endl;
 	else
-		std::cout << "char: Impossible" << std::endl;
+		std::cout << "Char: Impossible" << std::endl;
 }
 
 void	ScalarConverter::printDouble(double val){
@@ -146,7 +152,7 @@ void	ScalarConverter::printFloat(double val){
 	strstr << val;
 	result = strstr.str();
 	if (flVal == -INFINITY || flVal == +INFINITY || result == "nan"){
-			std::cout << "Floaat: " << val << "f" << std::endl;
+			std::cout << "Float: " << val << "f" << std::endl;
 			return ;
 	}
 	else if (val < -std::numeric_limits<float>::max()
@@ -177,7 +183,7 @@ void	ScalarConverter::caseInt(void){
 }
 
 void	 ScalarConverter::caseChar(void){
-	std::cout << "Char: " << chVal << std::endl; 
+	std::cout << "Char: '" << chVal << "'" << std::endl; 
 	std::cout << "Int: " << static_cast<int>(chVal) << std::endl;
 	std::cout << "Double: " << static_cast<double>(chVal) << ".0" <<std::endl;
 	std::cout << "Float: " << static_cast<float>(chVal) << ".0f" << std::endl;

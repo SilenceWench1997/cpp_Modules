@@ -4,8 +4,6 @@
 #include "Base.hpp"
 #include "functions.hpp"
 
-//CHECK FOR LEAKS!!!
-
 int main(){
 	Base *ptr;
 

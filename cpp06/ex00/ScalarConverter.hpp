@@ -36,7 +36,7 @@ private:
 	public:
 		virtual const char *what() const throw(){
 			return "Invalid input";
-		} 
+		}
 	};
 	static int  figureType(const std::string &literal);
 	static bool intCheck(const std::string &str);
@@ -53,6 +53,7 @@ private:
 	static void printInt(double val);
 	static void printDouble(double val);
 	static void printFloat(double val);
+	static std::string trimF(std::string str);
 public:
 	static void convert(const std::string &literal);
 
