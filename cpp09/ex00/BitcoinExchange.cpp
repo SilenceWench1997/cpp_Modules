@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <vector>
 
 void Btc::throwError(Errors cause, std::string str){
 	switch (cause){
@@ -76,69 +77,17 @@ void Btc::splitData(){
 		count++;
 	}
 	if (count != 2 || day.find('-') != std::string::npos)
-		throwError(FORMAT, date);
+		throwError(FORMAT, date); 
 }
 
 void Btc::checkMonthDay(){
-	switch (monthNum){
-		case 1:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 2: //february
-			switch (yearNum % 4){
-			case 0:
-			if (dayNum >= 1 && dayNum <= 29)
-				return;
-				break ;
+	int months[12] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-			default:
-			if (dayNum >= 1 && dayNum <= 28)
-				return;
-				break ;
-			}
-			break ;
-		case 3:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 4:
-		if (dayNum >= 1 && dayNum <= 30)
-			return;
-			break ;
-		case 5:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 6:
-		if (dayNum >= 1 && dayNum <= 30)
-			return;
-			break ;
-		case 7:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 8:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 9:
-		if (dayNum >= 1 && dayNum <= 30)
-			return;
-			break ;
-		case 10:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-		case 11:
-		if (dayNum >= 1 && dayNum <= 30)
-			return;
-			break ;
-		case 12:
-		if (dayNum >= 1 && dayNum <= 31)
-			return;
-			break ;
-	}
+	if (monthNum == 2){
+		if (dayNum <= months[monthNum - 1] + ((!(yearNum % 4) && (yearNum % 100)) || (!(yearNum%400))))
+			return ;
+	} else if (dayNum <= months[monthNum - 1])
+		return ;
 	throwError(MD, date);
 }
 
@@ -207,10 +156,12 @@ void Btc::getRate(){
 
 void Btc::storeData(){
 	std::ifstream db;
+	std::vector<int> test;
 
 	db.open("data.csv");
 	if (!db.is_open())
 		throw (std::invalid_argument("Could not open data file"));
+	getline(db,line);
 	while (getline(db, line)){
 		getRate();
 		data[line.substr(0, line.find(","))] = rate;
@@ -223,11 +174,9 @@ void Btc::displayBtc(){
 	if (data.find(date) != data.end()){
 		std::cout << date << " => " << val << " = " << val * data[date] << std::endl;
 	} else {
-		for (it = data.begin(); it != data.end(); ++it){
-			if (it->first > date){
-				std::cout << date << " => " << val << " = " << val * it->second << std::endl;
-				break ;
-			}
-		}
+		// std::cout << "here\n";
+		it = data.lower_bound(date);
+		--it;
+		std::cout << date << " => " << val << " = " << val * it->second << std::endl;
 	}
 }

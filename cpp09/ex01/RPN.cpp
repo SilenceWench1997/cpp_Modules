@@ -20,9 +20,9 @@ void Rpn::checkSynt(const std::string &expr){
 void Rpn::doAction(char op){
 	if (st.size() == 1)
 		throw std::invalid_argument("Invalid Expression");
-	int num2 = st.top();
+	float num2 = st.top();
 	st.pop();
-	int num1 = st.top();
+	float num1 = st.top();
 	st.pop();
 	switch (op){
 		case '+':

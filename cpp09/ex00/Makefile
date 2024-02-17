@@ -1,7 +1,7 @@
 NAME	=	btc	
 
 CC		= c++
-CPPFLAGS	= -Wall -Wextra -Werror -std=c++98#-fsanitize=address -g
+CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g#-fsanitize=address
 RM		= rm -rf
 
 OBJ_DIR	= obj

@@ -7,7 +7,7 @@
 
 class Rpn{
 private:
-	std::stack<int> st;
+	std::stack<double> st;
 	void checkSynt(const std::string &expr);
 	bool extraChars(char c);
 	void doAction(char op);
