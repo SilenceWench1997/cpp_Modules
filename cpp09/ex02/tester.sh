@@ -58,4 +58,3 @@ echo " Average time to sort using std::vector: $middleSpeedF $unit"
 echo " Quickest sorting done using std::vector: $lowestF $unit"
 echo " Average time to sort using std::deque: $middleSpeedS $unit"
 echo " Quickest sorting done using std::deque: $lowestS $unit"
-

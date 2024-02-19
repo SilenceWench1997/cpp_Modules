@@ -43,7 +43,7 @@ private:
 	void storeData();
 	std::map<std::string, float> data;
 public:
-	void parse(std::string filename);
+	void parse(const std::string &filename);
 	void displayBtc();
 };
 

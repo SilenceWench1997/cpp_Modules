@@ -121,7 +121,7 @@ void Btc::checkline(){
 	throwError(INVLINE, line);
 }
 
-void Btc::parse(std::string filename){
+void Btc::parse(const std::string &filename){
 	std::ifstream inp;
 	bool firstLine = true;
 
@@ -170,13 +170,18 @@ void Btc::storeData(){
 
 void Btc::displayBtc(){
 	storeData();
+	
 	std::map<std::string, float>::iterator it = data.begin();
 	if (data.find(date) != data.end()){
 		std::cout << date << " => " << val << " = " << val * data[date] << std::endl;
 	} else {
-		// std::cout << "here\n";
 		it = data.lower_bound(date);
-		--it;
+		if (it == data.begin()){
+			it = data.end();
+			--it;
+		}
+		else
+			--it;
 		std::cout << date << " => " << val << " = " << val * it->second << std::endl;
 	}
 }
